@@ -1,5 +1,5 @@
 <template>
-    <div class="two_col_layout">
+    <div class="col_layout">
          <component 
             v-for="(column, index) in columns"
             :key="index"
@@ -69,47 +69,12 @@
                 }
             }
         }
-        // computed: {
-        //     leftColumn () {
-        //         return Array.isArray(this.data.wp_2_col_layout_content.wp_2_col_layout_1)
-        //             ? this.data.wp_2_col_layout_content.wp_2_col_layout_1[0]
-        //             : this.data.wp_2_col_layout_content.wp_2_col_layout_1
-        //     },
-        //     leftColumnComponent () {
-        //         if(!this.leftColumn || !('acf_fc_layout' in this.leftColumn))
-        //             return 'NotFound'
-        //         return this.leftColumn.acf_fc_layout
-        //             .replace("wp", "")
-        //             .replace(/(\_\w)/g, function(k) {
-        //                 return k[1].toUpperCase();
-        //             })
-        //     },
-        //     rightColumn () {
-        //         return Array.isArray(this.data.wp_2_col_layout_content.wp_2_col_layout_2)
-        //             ? this.data.wp_2_col_layout_content.wp_2_col_layout_2[0]
-        //             : this.data.wp_2_col_layout_content.wp_2_col_layout_2
-        //     },
-        //     rightColumnComponent () {
-        //         if(!this.rightColumn || !('acf_fc_layout' in this.rightColumn))
-        //             return 'NotFound'
-
-        //         return this.rightColumn.acf_fc_layout
-        //             .replace("wp", "")
-        //             .replace(/(\_\w)/g, function(k) {
-        //                 return k[1].toUpperCase();
-        //             })
-        //     }
-        // }
     }
 
-//     "wp_2_col_layout_content": {
-        // "wp_2_col_layout_left": false,
-        // "wp_2_col_layout_right": false
-        // }
 </script>
 
 <style>
-    .two_col_layout {
+    .col_layout {
         width: 100%;
         display: flex;
     }

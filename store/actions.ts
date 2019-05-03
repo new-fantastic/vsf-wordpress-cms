@@ -27,6 +27,7 @@ export const actions = {
     const baseUrl = config.wordpressCms.url + part + typeBaseUrl[type]
 
     try {
+      console.log('url', baseUrl + slug)
       const response = await axios.get(baseUrl + slug)
 
       if(response.data.status == 404 || response.data.length < 1) {
@@ -40,7 +41,7 @@ export const actions = {
       console.log(state)
   
     } catch (err) {
-        router.push('/page-not-found')
+        // router.push('/page-not-found')
     }
   },
 

@@ -33,7 +33,7 @@
         if(context.props.renderSingle) {
           return h(ColLayout, {
             props: {
-              data: el
+              data: context.props.data.acf.section[0]
             }
           })
         } else {
