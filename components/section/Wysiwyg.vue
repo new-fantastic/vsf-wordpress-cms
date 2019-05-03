@@ -3,7 +3,7 @@
     v-if="data"
     class="section-wp visual-editor"
   >
-    <div class="container" v-html="data.wysiwyg_editor" />
+    <div class="container" v-html="data.wp_wysiwyg_editor" />
   </div>
 </template>
 

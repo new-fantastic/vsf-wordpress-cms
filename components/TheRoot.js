@@ -1,6 +1,6 @@
   import NumberToWord from '../util/NumberToWord'
-  import OneColLayout from './OneColLayout.vue'
-  import TwoColLayout from './TwoColLayout.vue'
+  import OneColLayout from './grid/OneColLayout.vue'
+  import TwoColLayout from './grid/TwoColLayout.vue'
 
   const cmpsSections = {
     OneColLayout,

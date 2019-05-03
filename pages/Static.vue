@@ -17,7 +17,7 @@ import { getLangByRoute } from '../util/GetLang'
 
 export default {
   components: {
-    Sections: () => import("../sections/TheRoot.js"),
+    Sections: () => import("../components/TheRoot.js"),
     Breadcrumbs
   },
 

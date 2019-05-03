@@ -11,56 +11,53 @@
     <div style="height:100%" :class="{container: data.BannerFullwidth_container === 'with_container'}">
 
       <img
-        v-if="data.BannerFullwidth_image"
+        v-if="data[prefix + 'image_desktop']"
         class="banner-fw__image"
-        :src="data.BannerFullwidth_image.url "
-        :alt="data.BannerFullwidth_image.alt"
+        :src="data[prefix + 'image_desktop'].url "
+        :alt="data[prefix + 'image_desktop'].alt"
       >
 
       <img
-        v-if="data.BannerFullwidth_image_mobile"
+        v-if="data[prefix + 'image_mobile']"
         class="banner-fw__image mobile"
-        :src="data.BannerFullwidth_image_mobile"
+        :src="data[prefix + 'image_mobile'].url"
+        :alt="data[prefix + 'image_mobile'].alt"
       >
 
       <div :class="{
         'banner-fw__content-wrap': true,
-        'banner-fw__content-wrap--left container': data.BannerFullwidth_position === 'left',
-        'banner-fw__content-wrap--center container': data.BannerFullwidth_position === 'center',
-        'banner-fw__content-wrap--right container': data.BannerFullwidth_position === 'right'
+        'banner-fw__content-wrap--left container': 
+          data[prefix + 'layout'][data[prefix + 'text_position_x']] === 'left',
+        'banner-fw__content-wrap--center container': 
+          data[prefix + 'layout'][data[prefix + 'text_position_x']] === 'center',
+        'banner-fw__content-wrap--right container': 
+          data[prefix + 'layout'][data[prefix + 'text_position_x']] === 'right'
       }"
       >
         <div class="banner-fw__content">
           <h2 class="banner-fw__content__title"
-            v-html="data.BannerFullwidth_title"
-            v-if="data.BannerFullwidth_title"
-            :class="{
-              'light' : data.text_color === 'Jasny',
-              'dark' : data.text_color === 'Ciemny'
-            }"
+            v-html="data[prefix + 'title']"
+            v-if="data[prefix + 'title']"
           />
 
           <div
             class="banner-fw__content__description"
-            :class="{
-              'light' : data.text_color === 'Jasny',
-              'dark' : data.text_color === 'Ciemny'
-            }"
-            v-if="data.BannerFullwidth_description"
-            v-html="data.BannerFullwidth_description"
+            v-if="data[prefix + 'description']"
+            v-html="data[prefix + 'description']"
           />
 
           <BaseButton
-            v-if="data.BannerFullwidth_btn.url"
+            v-if="data[prefix + 'button']"
             class="banner-fw__content__btn"
             :class="{ 
-              'light' : data.button_color === 'Jasny',
-              'dark' : data.button_color === 'Ciemny'
+              'light' : data[prefix + 'button'][prefix + 'button_color'] === 'light',
+              'dark' : data[prefix + 'button'][prefix + 'button_color'] === 'dark'
             }"
-            :size="data.BannerFullwidth_btnsize"
-            :link="data.BannerFullwidth_btn.url"
+            :size="data[prefix + 'button'][prefix + 'button_size']"
+            :link="data[prefix + 'button'][prefix + 'button_link']"
+            :externalLink="externalLink"
           >
-            {{ data.BannerFullwidth_btn.title }}
+            {{ data[prefix + 'button'][prefix + 'button_text'] }}
           </BaseButton>
         </div>
       </div>
@@ -69,11 +66,26 @@
 </template>
 
 <script>
+import IsLinkExternal from '../../util/IsLinkExternal'
+
 export default {
   props: {
     data: {
       type: Object,
       default: null
+    }
+  },
+  data () {
+    return {
+      prefix: 'wp_fullwidth_banner_'
+    }
+  },
+  components: {
+    BaseButton: () => import('../other/Button.vue')
+  },
+  computed: {
+    externalLink () {
+      return IsLinkExternal(this.data[this.prefix + 'button'][this.prefix + 'button_link'])
     }
   }
 }
@@ -85,6 +97,7 @@ export default {
 
   .section-wp {
     margin: 5rem auto;
+    min-height: 400px;
   }
 
   .banner-fw {
@@ -133,6 +146,14 @@ export default {
       height: 100%;
       object-fit: cover;
       z-index: 1;
+      display: none;
+
+      @media all and (min-width: 980px) {
+        display: block;
+        &.mobile {
+          display: none;
+        }
+      }
     }
 
     &__content-wrap {
