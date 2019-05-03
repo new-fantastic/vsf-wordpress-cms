@@ -10,8 +10,8 @@ export default {
       const langComponentName = (this.$route.name).replace(`${lang !== 'pl' ? rootStore.state.storeView.url.substr(1) + '-' : ''}`, '')
 
       return this.$store.state.wp_rest_content.pages[config.wordpressCms.pages[langComponentName]]
-            ? this.$store.state.wp_rest_content.pages[config.wordpressCms.pages[langComponentName]]
-            : null
+        ? this.$store.state.wp_rest_content.pages[config.wordpressCms.pages[langComponentName]]
+        : null
     }
   },
   async asyncData ({ store, route }) {
@@ -21,7 +21,7 @@ export default {
       config.wordpressCms.pages[route.name] ||
       config.wordpressCms.pages[langComponentName]
     ) {
-      let wp = await store.dispatch('wp_rest_content/loadContent', {
+      await store.dispatch('wp_rest_content/loadContent', {
         slug: config.wordpressCms.pages[langComponentName],
         lang,
         type: ContentTypes.Page
