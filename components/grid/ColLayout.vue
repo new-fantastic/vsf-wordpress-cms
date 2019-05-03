@@ -11,6 +11,7 @@
 
 <script>
     import sections from '../sections'
+    import { getLangByRoute } from '../../util/GetLang'
 
     export default {
         name: 'ColLayout',

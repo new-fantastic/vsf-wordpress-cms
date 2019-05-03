@@ -9,11 +9,10 @@ export function afterRegistration ({ Vue, store, isServer }) {
       store.commit(`wp_rest_content/${SET_LANG}`, getLangByRoute(route))
       
       // They'll be loaded in parallel
-      // await Promise.all([
-      //   store.dispatch('wp_rest_content/loadTopNav'),
-      //   store.dispatch('wp_rest_content/loadTopAlert'),
-      //   store.dispatch('wp_rest_content/loadBottomMenu')
-      // ])
+      await store.dispatch('wp_rest_content/loadMenu', {
+        menuSlugs: config.wordpressCms.menus,
+        lang: getLangByRoute(route)
+      })
     }
   })
 }
