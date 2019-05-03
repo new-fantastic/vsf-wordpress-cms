@@ -1,6 +1,6 @@
-# vsf-wp-json
+# vsf-wp-rest-api
 
-Wordpress module for Vue Storefront based on Wordpress REST API.
+Wordpress REST API module for Vue Storefront providing an out-of-box routing and data handling.
 
 ## Installation
 
