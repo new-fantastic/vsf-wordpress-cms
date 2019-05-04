@@ -53,6 +53,8 @@
                         return k[1].toUpperCase();
                     })
 
+                sectionData.columnAmount = 1
+
                 this.columns.push(sectionData)
             } else {
                 for(let i = 1; i <= this.columnAmount; i++) {
@@ -65,6 +67,8 @@
                         .replace(/(\_\w)/g, function(k) {
                             return k[1].toUpperCase();
                         })
+
+                    sectionData.columnAmount = this.columnAmount
 
                     this.columns.push(sectionData)
                 }

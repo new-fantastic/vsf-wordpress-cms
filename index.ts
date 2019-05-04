@@ -12,4 +12,4 @@ const moduleConfig: VueStorefrontModuleConfig = {
   router: { routes }
 }
 
-export const WpRestApi = new VueStorefrontModule(moduleConfig)
+export const VsfWpRestContent = new VueStorefrontModule(moduleConfig)

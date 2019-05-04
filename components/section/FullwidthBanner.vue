@@ -1,64 +1,87 @@
 <template>
   <div
-    v-if="data"
-    :class="{
-      'section-wp banner-fw': true,
-      'banner-fw--lg': data.BannerFullwidth_height === 'lg',
-      'banner-fw--sm': data.BannerFullwidth_height === 'sm',
-      'margins-top-bottom' : data.BannerFullwidth_margins === true
-    }"
+    class="banner__wrapper"
   >
-    <div style="height:100%" :class="{container: data.BannerFullwidth_container === 'with_container'}">
-
+    <div
+      class="banner__images"
+    >
       <img
+        class="banner__image--desktop"
         v-if="data[prefix + 'image_desktop']"
-        class="banner-fw__image"
-        :src="data[prefix + 'image_desktop'].url "
+        :src="data[prefix + 'image_desktop'].url"
         :alt="data[prefix + 'image_desktop'].alt"
       >
-
       <img
+        class="banner__image--mobile"
         v-if="data[prefix + 'image_mobile']"
-        class="banner-fw__image mobile"
         :src="data[prefix + 'image_mobile'].url"
         :alt="data[prefix + 'image_mobile'].alt"
       >
-
-      <div :class="{
-        'banner-fw__content-wrap': true,
-        'banner-fw__content-wrap--left container': 
-          data[prefix + 'layout'][data[prefix + 'text_position_x']] === 'left',
-        'banner-fw__content-wrap--center container': 
-          data[prefix + 'layout'][data[prefix + 'text_position_x']] === 'center',
-        'banner-fw__content-wrap--right container': 
-          data[prefix + 'layout'][data[prefix + 'text_position_x']] === 'right'
-      }"
+    </div>
+    <div
+      class="banner__content"
+      :class="{
+        'boxed--inner' : data[prefix + 'layout'][prefix + 'margins_x'],
+        'margin-y--sm' : data[prefix + 'layout'][prefix + 'margins_y'] === 'small',
+        'margin-y--lg' : data[prefix + 'layout'][prefix + 'margins_y'] === 'big',
+        [marginSize] : true
+        }"
+    >
+      <div
+        class="banner__description"
       >
-        <div class="banner-fw__content">
-          <h2 class="banner-fw__content__title"
-            v-html="data[prefix + 'title']"
+        <div
+          class="banner__description--inner"
+          :class="{
+            'position-x--left' :
+              data[prefix + 'layout'][data[prefix + 'text_position_x']] === 'left',
+            'position-x--center' :
+              data[prefix + 'layout'][data[prefix + 'text_position_x']] === 'center',
+            'position-x--right' :
+              data[prefix + 'layout'][data[prefix + 'text_position_x']] === 'right',
+            'position-y--top' :
+              data[prefix + 'layout'][data[prefix + 'text_position_y']] === 'top',
+            'position-y--center' :
+              data[prefix + 'layout'][data[prefix + 'text_position_y']] === 'center',
+            'position-y--bottom' :
+              data[prefix + 'layout'][data[prefix + 'text_position_y']] === 'bottom',
+          }"
+        >
+          <h2
+            class="banner__title"
+            :class="{
+              'dark' : titleDark,
+              'light' : titleLight
+            }"
             v-if="data[prefix + 'title']"
+            v-html="data[prefix + 'title']"
           />
-
           <div
-            class="banner-fw__content__description"
+            class="banner__subtitle"
+            :class="{
+              'dark' : subtitleDark,
+              'light' : subtitleLight
+            }"
             v-if="data[prefix + 'description']"
             v-html="data[prefix + 'description']"
           />
-
-          <BaseButton
-            v-if="data[prefix + 'button']"
-            class="banner-fw__content__btn"
-            :class="{ 
-              'light' : data[prefix + 'button'][prefix + 'button_color'] === 'light',
-              'dark' : data[prefix + 'button'][prefix + 'button_color'] === 'dark'
-            }"
-            :size="data[prefix + 'button'][prefix + 'button_size']"
-            :link="data[prefix + 'button'][prefix + 'button_link']"
-            :externalLink="externalLink"
+          <div
+            class="banner__actions"
           >
-            {{ data[prefix + 'button'][prefix + 'button_text'] }}
-          </BaseButton>
+            <BaseButton
+              v-for="(button, index) in data.actions"
+              :key="button[prefix + 'button'][prefix + 'button_link']"
+              :class="{
+                'dark' : button[prefix + 'button'][prefix + 'button_color'] === 'dark',
+                'light' : button[prefix + 'button'][prefix + 'button_color'] === 'light',
+                'outline' : false
+              }"
+              :size="button[prefix + 'button'][prefix + 'button_size']"
+              :link="button[prefix + 'button'][prefix + 'button_link']"
+              v-html="button[prefix + 'button'][prefix + 'button_text']"
+              :externalLink="externalLink[index]"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -85,7 +108,21 @@ export default {
   },
   computed: {
     externalLink () {
-      return IsLinkExternal(this.data[this.prefix + 'button'][this.prefix + 'button_link'])
+      const links = []
+      this.data.actions.forEach(el => {
+        links.push(
+          el[this.prefix + 'button'][this.prefix + 'button_link']
+        )
+      })
+      return links
+    },
+    marginSize () {
+      if(this.data.columnAmount <= 2) {
+        return 'margin-x--lg'
+      } else if(this.data.columnAmount == 3) {
+        return 'margin-x--md'
+      }
+      return 'margin-x--sm' // 4+
     }
   }
 }
