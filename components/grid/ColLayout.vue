@@ -1,5 +1,5 @@
 <template>
-    <div class="col_layout" v-if="success">
+    <div :class="className" v-if="success === true">
          <component 
             v-for="(column, index) in columns"
             :key="index"
@@ -7,12 +7,14 @@
             :data="column"
             />
     </div>
+    <NotFound v-else-if="success === false"/>
 </template>
 
 <script>
     import sections from '../sections'
     import { getLangByRoute } from '../../util/GetLang'
     import { getColumnAmountAndPrefix, layoutNameToCmpName, prepareColumnToRow } from '../../util/Filters'
+    import NumberToWord from '../../util/NumberToWord'
 
     export default {
         name: 'ColLayout',
@@ -27,7 +29,8 @@
             return {
                 columns: [],
                 columnAmount: null,
-                success: false
+                success: null,
+                className: null
             }
         },
         created () {
@@ -35,6 +38,7 @@
                 const { columns, prefix } = getColumnAmountAndPrefix(this.data)
                 const columnsKey = prefix + 'content'
                 this.columnAmount = columns
+                this.className = NumberToWord(this.columnAmount).toLowerCase() + '-col-section'
 
                 for(let i = 1; i <= this.columnAmount; i++) {
                     this.columns.push(
@@ -44,6 +48,7 @@
 
                 this.success = true
             } catch(e) {
+                this.success = false
                 console.error(e.message)
             }
         }
