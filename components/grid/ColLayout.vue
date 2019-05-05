@@ -1,5 +1,5 @@
 <template>
-    <div class="col_layout">
+    <div class="col_layout" v-if="success">
          <component 
             v-for="(column, index) in columns"
             :key="index"
@@ -12,7 +12,7 @@
 <script>
     import sections from '../sections'
     import { getLangByRoute } from '../../util/GetLang'
-    import { getColumnAmountAndPrefix } from '../../util/Filters'
+    import { getColumnAmountAndPrefix, layoutNameToCmpName, prepareColumnToRow } from '../../util/Filters'
 
     export default {
         name: 'ColLayout',
@@ -26,56 +26,33 @@
         data () {
             return {
                 columns: [],
-                columnAmount: null
+                columnAmount: null,
+                success: false
             }
         },
         created () {
-            // const key = Object.keys(this.data).filter(v => v != "acf_fc_layout")
-            // if(key.length < 1) {
-            //     return
-            // }
-            // const regex = /wp_(\d+)_col_layout/.exec(key[0])
-            
-            // if (regex === null || regex.length < 2) {
-            //     return
-            // }
-            // this.columnAmount = regex[1]
-            // const prefix = regex[0] + '_'
-            const { columns, prefix } = getColumnAmountAndPrefix(this.data)
+            try {
+                const { columns, prefix } = getColumnAmountAndPrefix(this.data)
+            } catch(e) {
+                console.error(e.message)
+                return
+            }
             const columnsKey = prefix + 'content'
             this.columnAmount = columns
 
             if(this.columnAmount == 1) {
-                const sectionData = Array.isArray(this.data[columnsKey])
-                    ? this.data[columnsKey][0]
-                    : this.data[columnsKey]
-
-                sectionData.cmpName = sectionData.acf_fc_layout
-                    .replace("wp", "")
-                    .replace(/(\_\w)/g, function(k) {
-                        return k[1].toUpperCase();
-                    })
-
-                sectionData.columnAmount = 1
-
-                this.columns.push(sectionData)
+                this.columns.push(
+                    prepareColumnToRow(this.data[columnsKey], this.columnAmount)
+                )
             } else {
                 for(let i = 1; i <= this.columnAmount; i++) {
-                    const sectionData = Array.isArray(this.data[columnsKey][prefix + i])
-                        ? this.data[columnsKey][prefix + i][0]
-                        : this.data[columnsKey][prefix + i]
-
-                    sectionData.cmpName = sectionData.acf_fc_layout
-                        .replace("wp", "")
-                        .replace(/(\_\w)/g, function(k) {
-                            return k[1].toUpperCase();
-                        })
-
-                    sectionData.columnAmount = this.columnAmount
-
-                    this.columns.push(sectionData)
+                    this.columns.push(
+                        prepareColumnToRow(this.data[columnsKey][prefix + i], this.columnAmount)
+                    )
                 }
             }
+
+            this.success = true
         }
     }
 
