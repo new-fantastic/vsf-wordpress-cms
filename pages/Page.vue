@@ -60,7 +60,8 @@ export default {
     async $route(to) {
       await this.$store.dispatch("wp_rest_content/loadContent", {
         slug: to.params.slug,
-        lang: getLangByRoute(to)
+        lang: getLangByRoute(to),
+        type: ContentTypes.Page
       });
     }
   },

@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import IsLinkExternal from '../../util/IsLinkExternal'
+import IsLinkExternal from '../../../util/IsLinkExternal'
 
 export default {
   props: {
@@ -98,7 +98,7 @@ export default {
     }
   },
   components: {
-    BaseButton: () => import('../other/Button.vue')
+    BaseButton: () => import('../../Base/BaseButton.vue')
   },
   computed: {
     externalLink () {

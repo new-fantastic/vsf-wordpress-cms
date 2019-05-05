@@ -1,5 +1,5 @@
   import NumberToWord from '../util/NumberToWord'
-  import ColLayout from './grid/ColLayout.vue'
+  import ColLayout from './Content/Layout.vue'
 
   export default {
     functional: true,
@@ -30,28 +30,21 @@
     render(h, context) {
       if(context.props.data && context.props.data.acf && context.props.data.acf.section) {
 
-        if(context.props.renderSingle) {
-          return h(ColLayout, {
-            props: {
-              data: context.props.data.acf.section[0]
-            }
-          })
-        } else {
-          const sections = []
-          context.props.data.acf.section.forEach((el, index) => {
+        const sections = []
+        context.props.data.acf.section.forEach((el, index) => {
 
-            sections.push(
-              h(ColLayout, {
-                props: {
-                  data: el
-                }
-              })
-            )
+          sections.push(
+            h(ColLayout, {
+              props: {
+                data: el
+              }
+            })
+          )
 
-          })
+        })
 
-          return sections
-        }
+        return sections.length > 1 ? sections : sections[0]
+        
       }
     }
   }

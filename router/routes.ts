@@ -1,6 +1,6 @@
 import config from 'config'
 
-const lazyStaticPage = () => import('../pages/Static.vue')
+const lazyStaticPage = () => import('../pages/Page.vue')
 
 interface PartialRoute {
   name: string

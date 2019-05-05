@@ -1,24 +1,24 @@
 <template>
-    <div :class="className" v-if="success === true">
-         <component 
-            v-for="(column, index) in columns"
-            :key="index"
-            :is="column.cmpName"
-            :data="column"
-            />
-    </div>
-    <NotFound v-else-if="success === false"/>
+  <div :class="className" v-if="success === true">
+    <component 
+      v-for="(column, index) in columns"
+      :key="index"
+      :is="column.cmpName"
+      :data="column"
+    />
+  </div>
+  <NotFound v-else-if="success === false"/>
 </template>
 
 <script>
-    import sections from '../sections'
+    import blocks from '../blocks'
     import { getLangByRoute } from '../../util/GetLang'
     import { getColumnAmountAndPrefix, layoutNameToCmpName, prepareColumnToRow } from '../../util/Filters'
     import NumberToWord from '../../util/NumberToWord'
 
     export default {
         name: 'ColLayout',
-        components: sections,
+        components: blocks,
         props: {
             data: {
                 type: Object,
