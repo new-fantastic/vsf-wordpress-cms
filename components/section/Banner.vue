@@ -7,24 +7,23 @@
     >
       <img
         class="banner__image--desktop"
-        v-if="data[prefix + 'image_desktop']"
-        :src="data[prefix + 'image_desktop'].url"
-        :alt="data[prefix + 'image_desktop'].alt"
+        v-if="data['background_image_desktop']"
+        :src="data['background_image_desktop'].url"
+        :alt="data['background_image_desktop'].alt"
       >
       <img
         class="banner__image--mobile"
-        v-if="data[prefix + 'image_mobile']"
-        :src="data[prefix + 'image_mobile'].url"
-        :alt="data[prefix + 'image_mobile'].alt"
+        v-if="data['background_image_mobile']"
+        :src="data['background_image_mobile'].url"
+        :alt="data['background_image_mobile'].alt"
       >
     </div>
     <div
       class="banner__content"
       :class="{
-        'boxed--inner' : data[prefix + 'layout'][prefix + 'margins_x'],
-        'margin-y--sm' : data[prefix + 'layout'][prefix + 'margins_y'] === 'small',
-        'margin-y--lg' : data[prefix + 'layout'][prefix + 'margins_y'] === 'big',
-        [marginSize] : true
+        'boxed--inner' : data['inner_layout']['margins_x'],
+        'margin-y--sm' : data['inner_layout']['margins_y'] === 'small',
+        'margin-y--lg' : data['inner_layout']['margins_y'] === 'big'
         }"
     >
       <div
@@ -34,17 +33,17 @@
           class="banner__description--inner"
           :class="{
             'position-x--left' :
-              data[prefix + 'layout'][data[prefix + 'text_position_x']] === 'left',
+              data['inner_layout']['text_position_x'] === 'left',
             'position-x--center' :
-              data[prefix + 'layout'][data[prefix + 'text_position_x']] === 'center',
+              data['inner_layout']['text_position_x'] === 'center',
             'position-x--right' :
-              data[prefix + 'layout'][data[prefix + 'text_position_x']] === 'right',
+              data['inner_layout']['text_position_x'] === 'right',
             'position-y--top' :
-              data[prefix + 'layout'][data[prefix + 'text_position_y']] === 'top',
+              data['inner_layout']['text_position_y'] === 'top',
             'position-y--center' :
-              data[prefix + 'layout'][data[prefix + 'text_position_y']] === 'center',
+              data['inner_layout']['text_position_y'] === 'center',
             'position-y--bottom' :
-              data[prefix + 'layout'][data[prefix + 'text_position_y']] === 'bottom',
+              data['inner_layout']['text_position_y'] === 'bottom',
           }"
         >
           <h2
@@ -53,8 +52,8 @@
               'dark' : titleDark,
               'light' : titleLight
             }"
-            v-if="data[prefix + 'title']"
-            v-html="data[prefix + 'title']"
+            v-if="data['title']"
+            v-html="data['title']"
           />
           <div
             class="banner__subtitle"
@@ -62,23 +61,23 @@
               'dark' : subtitleDark,
               'light' : subtitleLight
             }"
-            v-if="data[prefix + 'description']"
-            v-html="data[prefix + 'description']"
+            v-if="data['subtitle']"
+            v-html="data['subtitle']"
           />
           <div
             class="banner__actions"
           >
             <BaseButton
               v-for="(button, index) in data.actions"
-              :key="button[prefix + 'button'][prefix + 'button_link']"
+              :key="button['button_link']"
               :class="{
-                'dark' : button[prefix + 'button'][prefix + 'button_color'] === 'dark',
-                'light' : button[prefix + 'button'][prefix + 'button_color'] === 'light',
+                'dark' : button['button_color'] === 'dark',
+                'light' : button['button_color'] === 'light',
                 'outline' : false
               }"
-              :size="button[prefix + 'button'][prefix + 'button_size']"
-              :link="button[prefix + 'button'][prefix + 'button_link']"
-              v-html="button[prefix + 'button'][prefix + 'button_text']"
+              :size="button['button_size']"
+              :link="button['button_link']"
+              v-html="button['button_label']"
               :externalLink="externalLink[index]"
             />
           </div>
@@ -98,11 +97,6 @@ export default {
       default: null
     }
   },
-  data () {
-    return {
-      prefix: 'wp_fullwidth_banner_'
-    }
-  },
   components: {
     BaseButton: () => import('../other/Button.vue')
   },
@@ -111,18 +105,10 @@ export default {
       const links = []
       this.data.actions.forEach(el => {
         links.push(
-          el[this.prefix + 'button'][this.prefix + 'button_link']
+          IsLinkExternal(el['button_link'])
         )
       })
       return links
-    },
-    marginSize () {
-      if(this.data.columnAmount <= 2) {
-        return 'margin-x--lg'
-      } else if(this.data.columnAmount == 3) {
-        return 'margin-x--md'
-      }
-      return 'margin-x--sm' // 4+
     }
   }
 }

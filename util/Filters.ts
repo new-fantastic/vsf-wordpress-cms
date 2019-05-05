@@ -19,11 +19,12 @@ export const getColumnAmountAndPrefix = (data: object) => {
 }
 
 export const layoutNameToCmpName = (layoutName: string): string => {
-    return layoutName
-        .replace("wp", "")
-        .replace(/(\_\w)/g, function(k) {
-            return k[1].toUpperCase();
-        })
+    // return layoutName
+    //     .replace("wp", "")
+    //     .replace(/(\_\w)/g, function(k) {
+    //         return k[1].toUpperCase();
+    //     })
+    return (layoutName.substr(0, 1).toUpperCase() + layoutName.substr(1)).replace('_section', '')
 }
 
 export const prepareColumnToRow = (base: Object, columnAmount: Number): Object => {

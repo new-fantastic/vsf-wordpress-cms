@@ -33,26 +33,19 @@
         created () {
             try {
                 const { columns, prefix } = getColumnAmountAndPrefix(this.data)
-            } catch(e) {
-                console.error(e.message)
-                return
-            }
-            const columnsKey = prefix + 'content'
-            this.columnAmount = columns
+                const columnsKey = prefix + 'content'
+                this.columnAmount = columns
 
-            if(this.columnAmount == 1) {
-                this.columns.push(
-                    prepareColumnToRow(this.data[columnsKey], this.columnAmount)
-                )
-            } else {
                 for(let i = 1; i <= this.columnAmount; i++) {
                     this.columns.push(
                         prepareColumnToRow(this.data[columnsKey][prefix + i], this.columnAmount)
                     )
                 }
-            }
 
-            this.success = true
+                this.success = true
+            } catch(e) {
+                console.error(e.message)
+            }
         }
     }
 

@@ -1,5 +1,5 @@
 export default {
-  FullwidthBanner: () => import('./section/FullwidthBanner'),
+  Banner: () => import('./section/Banner'),
   NotFound: () => import('./section/NotFound'),
   Wysiwyg: () => import('./section/Wysiwyg')
 }
