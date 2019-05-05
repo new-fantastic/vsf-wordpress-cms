@@ -1,12 +1,16 @@
 <template>
-  <div :class="className" v-if="success === true">
-    <component 
-      v-for="(column, index) in columns"
-      :key="index"
-      :is="column.cmpName"
-      :data="column"
-    />
-  </div>
+  <section :class="sectionName" v-if="success === true">
+    <div
+        class="col"
+        v-for="(column, index) in columns"
+        :key="index"
+    >
+        <component
+        :is="column.cmpName"
+        :data="column"
+        />
+    </div>
+  </section>
   <NotFound v-else-if="success === false"/>
 </template>
 
@@ -30,7 +34,7 @@
                 columns: [],
                 columnAmount: null,
                 success: null,
-                className: null
+                sectionName: null
             }
         },
         created () {
@@ -38,7 +42,7 @@
                 const { columns, prefix } = getColumnAmountAndPrefix(this.data)
                 const columnsKey = prefix + 'content'
                 this.columnAmount = columns
-                this.className = NumberToWord(this.columnAmount).toLowerCase() + '-col-section'
+                this.sectionName = NumberToWord(this.columnAmount).toLowerCase() + '-col-layout'
 
                 for(let i = 1; i <= this.columnAmount; i++) {
                     this.columns.push(
