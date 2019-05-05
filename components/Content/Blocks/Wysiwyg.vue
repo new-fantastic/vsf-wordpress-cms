@@ -1,9 +1,13 @@
 <template>
   <div
     v-if="data"
-    class="section-wp visual-editor"
+    id="wysiwyg"
+    class="wysiwyg__wrapper"
   >
-    <div class="container" v-html="data.wysiwyg_content" />
+    <div
+      class="wysiwyg__content"
+      v-html="data.wysiwyg_content"
+    />
   </div>
 </template>
 
@@ -20,41 +24,6 @@ export default {
 
 <style lang="scss">
 
-// @import '~theme/css/kubota/base/typography';
-
-.section-wp.visual-editor {
-  h1 {
-    // @extend .heading-lg;
-  }
-  h2 {
-    // @extend .heading-md;
-    margin: 3rem 0;
-  }
-  h3 {
-    // @extend .heading-sm;
-    margin: 2rem 0;
-  }
-  p {
-    margin: 1rem 0;
-  }
-
-  ul, ol {
-    list-style: initial;
-    list-style-position: inside;
-    margin-left: 2rem;
-
-    li {
-      margin-bottom: 1rem;
-    }
-  }
-
-  ol {
-    list-style-type: decimal;
-  }
-
-  strong {
-    font-weight: bold;
-  }
-}
+  @import '../../../styles/components/Content/Blocks/Wysiwyg.scss';
 
 </style>

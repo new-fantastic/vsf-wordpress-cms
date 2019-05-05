@@ -1,6 +1,7 @@
 <template>
-  <div 
+  <button 
     v-bind="$attrs"
+    class="flex position-x--center position-y--center"
     :class="{
     'btn': true,
     'btn--sm': size === 'sm',
@@ -27,7 +28,7 @@
     >
       <slot />
     </div>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -63,45 +64,7 @@ export default {
 </script>
 
 <style lang="scss">
-//   @import '~theme/css/kubota/base/variables';
-//   @import '~theme/css/kubota/base/buttons';
 
-  .btn {
-    position: relative;
-    // @extend .btn;
+  @import '../../styles/components/Base/BaseButton.scss';
 
-    &.dark {
-      color: #fff !important;
-      background-color: #000;
-    }
-
-    &.light {
-      color: #000 !important;
-      background-color: #fff;
-    }
-
-    a, &__inner {
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      width: 100%;
-      height: 100%;
-    }
-
-    &--sm {
-    //   @extend .btn--sm;
-    }
-
-    &--lg {
-    //   @extend .btn--lg;
-    }
-
-    &--full {
-    //   @extend .btn--full;
-    }
-
-    &--bordered {
-    //   @extend .btn--bordered;
-    }
-  }
 </style>

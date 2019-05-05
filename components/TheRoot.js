@@ -1,5 +1,5 @@
   import NumberToWord from '../util/NumberToWord'
-  import ColLayout from './Content/Layout.vue'
+  import Section from './Content/Section.vue'
 
   export default {
     functional: true,
@@ -15,11 +15,11 @@
           if(!('acf' in value)) {
             return false
           }
-          if(!('section' in value.acf)) {
+          if(!('sections' in value.acf)) {
             return false
           }
 
-          if(value.acf.section.lenght < 1) {
+          if(value.acf.sections.length < 1) {
             return false
           }
 
@@ -28,13 +28,13 @@
       }
     },
     render(h, context) {
-      if(context.props.data && context.props.data.acf && context.props.data.acf.section) {
+      if(context.props.data && context.props.data.acf && context.props.data.acf.sections) {
 
-        const sections = []
-        context.props.data.acf.section.forEach((el, index) => {
+        const wpSections = []
+        context.props.data.acf.sections.forEach((el, index) => {
 
-          sections.push(
-            h(ColLayout, {
+          wpSections.push(
+            h(Section, {
               props: {
                 data: el
               }
@@ -43,7 +43,7 @@
 
         })
 
-        return sections.length > 1 ? sections : sections[0]
+        return wpSections.length > 1 ? wpSections : wpSections[0]
         
       }
     }

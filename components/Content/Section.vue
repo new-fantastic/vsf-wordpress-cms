@@ -1,15 +1,18 @@
 <template>
-  <section :class="sectionName" v-if="success === true">
-    <div
-        class="col"
-        v-for="(column, index) in columns"
-        :key="index"
+    <section
+        :class="sectionName"
+        v-if="success === true"
     >
-        <component
-        :is="column.cmpName"
-        :data="column"
-        />
-    </div>
+        <div
+            class="column"
+            v-for="(column, index) in columns"
+            :key="index"
+        >
+            <component
+            :is="column.cmpName"
+            :data="column"
+            />
+        </div>
   </section>
   <NotFound v-else-if="success === false"/>
 </template>
@@ -21,7 +24,7 @@
     import NumberToWord from '../../util/NumberToWord'
 
     export default {
-        name: 'ColLayout',
+        name: 'Section',
         components: blocks,
         props: {
             data: {
@@ -60,9 +63,10 @@
 
 </script>
 
-<style>
+<style lang="scss">
     .col_layout {
         width: 100%;
         display: flex;
     }
+    @import '../../styles/main.scss';
 </style>
