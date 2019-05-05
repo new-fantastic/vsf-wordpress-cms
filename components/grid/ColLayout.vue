@@ -12,6 +12,7 @@
 <script>
     import sections from '../sections'
     import { getLangByRoute } from '../../util/GetLang'
+    import { getColumnAmountAndPrefix } from '../../util/Filters'
 
     export default {
         name: 'ColLayout',
@@ -29,18 +30,20 @@
             }
         },
         created () {
-            const key = Object.keys(this.data).filter(v => v != "acf_fc_layout")
-            if(key.length < 1) {
-                return
-            }
-            const regex = /wp_(\d+)_col_layout/.exec(key[0])
+            // const key = Object.keys(this.data).filter(v => v != "acf_fc_layout")
+            // if(key.length < 1) {
+            //     return
+            // }
+            // const regex = /wp_(\d+)_col_layout/.exec(key[0])
             
-            if (regex === null || regex.length < 2) {
-                return
-            }
-            this.columnAmount = regex[1]
-            const prefix = regex[0] + '_'
+            // if (regex === null || regex.length < 2) {
+            //     return
+            // }
+            // this.columnAmount = regex[1]
+            // const prefix = regex[0] + '_'
+            const { columns, prefix } = getColumnAmountAndPrefix(this.data)
             const columnsKey = prefix + 'content'
+            this.columnAmount = columns
 
             if(this.columnAmount == 1) {
                 const sectionData = Array.isArray(this.data[columnsKey])
