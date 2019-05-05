@@ -1,10 +1,13 @@
-@import 'base/buttons.scss';
-@import 'base/helpers.scss';
-@import 'base/reset.scss';
-@import 'base/typography.scss';
+@import 'core/reset.scss';
+@import 'core/typography.scss';
+@import 'core/utilities/helpers.scss';
+
+@import 'core/variables/colors.scss';
+@import 'core/variables/proportions.scss';
+
+@import 'core/mixins/transitions.scss';
 
 @import 'layout/columns.scss';
+@import 'layout/section.scss';
+@import 'layout/positions.scss';
 @import 'layout/spacing.scss';
-
-@import 'variables/colors.scss';
-@import 'variables/proportions.scss';

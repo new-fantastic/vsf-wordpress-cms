@@ -1,0 +1,11 @@
+@mixin transition-slow-ease-out {
+  transition: all .5s ease-out;
+}
+
+@mixin transition-normal-ease-out {
+  transition: all .3s ease-out;
+}
+
+@mixin transition-fast-ease-out {
+  transition: all .1s ease-out;
+}

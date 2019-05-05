@@ -1,0 +1,35 @@
+.column {
+  width: 100%;
+}
+
+.one-col-layout {
+  display: flex;
+  
+  > .column {
+    flex-basis: 100%;
+  }
+}
+
+.two-col-layout {
+  display: flex;
+  
+  > .column {
+    flex-basis: 50%;
+  }
+}
+
+.three-col-layout {
+  display: flex;
+  
+  > .column {
+    flex-basis: 33.33%;
+  }
+}
+
+.four-col-layout {
+  display: flex;
+  
+  > .column {
+    flex-basis: 25%;
+  }
+}
