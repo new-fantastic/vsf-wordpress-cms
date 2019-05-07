@@ -1,18 +1,5 @@
 export const getColumnAmount = (data: string) => {
-
-  // const key = Object.keys(data).filter(v => v != "acf_fc_layout")
-  // if(key.length < 1) {
-  //   throw new Error('There is not layout object in given data')
-  //   return
-  // }
-
   const regex = /section_(\d+)_col/.exec(data)
-            
-  // if (regex === null || regex.length < 2) {
-  //   throw new Error('Given data has badly named key for layout configuration')
-  //   return
-  // }
-
   return  Number(regex[1])
 }
 

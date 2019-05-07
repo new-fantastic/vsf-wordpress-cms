@@ -46,8 +46,9 @@
 import rootStore from "@vue-storefront/store";
 import config from 'config'
 import Breadcrumbs from 'theme/components/core/Breadcrumbs.vue'
-import { getLangByRoute } from '../util/GetLang'
+// import { getLangByRoute } from '../util/Lang'
 import { ContentTypes } from '../types'
+import { getLangAndCmpName } from '../util/Lang'
 
 export default {
   components: {
@@ -70,9 +71,8 @@ export default {
       return this.getCategories;
     },
     wpData () {
-      const lang = getLangByRoute(this.$route)
-      const langComponentName = (this.$route.name).replace(`${lang !== 'pl' ? rootStore.state.storeView.url.substr(1) + '-' : ''}`, '')
-    
+      const { lang, langComponentName } = getLangAndCmpName(this.$route)
+ 
       return this.$store.state.wp_rest_content.pages[this.$route.params.slug]
     }
   },

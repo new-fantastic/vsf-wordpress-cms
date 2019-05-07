@@ -1,7 +1,7 @@
 import { AsyncDataLoader } from '@vue-storefront/core/lib/async-data-loader'
 import config from 'config'
 import { SET_LANG } from '../store/mutation-types'
-import { getLangByRoute } from '../util/GetLang'
+import { getLangByRoute } from '../util/Lang'
 
 export function afterRegistration ({ Vue, store, isServer }) {
   AsyncDataLoader.push({
