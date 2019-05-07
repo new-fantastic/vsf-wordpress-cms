@@ -1,6 +1,12 @@
 <template>
     <section
-        class="container padding__y--sm"
+        class="container"
+        :class="{ 
+            'margin__y--sm' : data.section_options.margins.margins_y === 'sm',
+            'margin__y--md' : data.section_options.margins.margins_y === 'md',
+            'margin__y--lg' : data.section_options.margins.margins_y === 'lg',
+
+        }"
         v-if="success === true"
     >
         <div

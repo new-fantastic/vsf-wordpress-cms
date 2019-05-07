@@ -1,9 +1,12 @@
+@import '../core/variables/proportions.scss';
+
 .column {
   width: 100%;
 }
 
 .one-col-layout {
   display: flex;
+  justify-content: space-between;
   
   > .column {
     flex-basis: 100%;
@@ -12,24 +15,27 @@
 
 .two-col-layout {
   display: flex;
+  justify-content: space-between;
   
   > .column {
-    flex-basis: 50%;
+    flex-basis: calc(50% - #{$gap-sm});
   }
 }
 
 .three-col-layout {
   display: flex;
+  justify-content: space-between;
   
   > .column {
-    flex-basis: 33.33%;
+    flex-basis:  calc(33.33% - #{$gap-sm});
   }
 }
 
 .four-col-layout {
   display: flex;
+  justify-content: space-between;
   
   > .column {
-    flex-basis: 25%;
+    flex-basis:  calc(25% - #{$gap-sm});
   }
 }

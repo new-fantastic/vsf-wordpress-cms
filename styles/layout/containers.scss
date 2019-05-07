@@ -7,9 +7,9 @@
     margin: auto;
     
     &--boxed {
-      width: 90%;
+      width: calc(100% - 6rem);
       margin: auto;
-      max-width: 1440px;
+      max-width: 1770px;
       margin: auto;
     }
   }
