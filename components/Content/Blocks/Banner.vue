@@ -2,13 +2,16 @@
   <div
     class="banner"
   >
-    <!-- <div
-      class="banner__wrapper"
-    > -->
+    <div
+      class="banner__inner"
+    >
       <div
-        class="banner__background"
+        class="banner__background flex"
       >
-        <img
+        <div
+          class="banner__background__inner"
+        >
+          <img
           class="banner__background__image desktop"
           v-if="data['background_image_desktop']"
           :src="data['background_image_desktop'].url"
@@ -20,9 +23,10 @@
           :src="data['background_image_mobile'].url"
           :alt="data['background_image_mobile'].alt"
         >
+        </div>
       </div>
       <div
-        class="banner__content"
+        class="banner__content padding__y--lg"
         :class="{
           'boxed--inner' : data['inner_layout']['margins_x'],
           'margin-y--sm' : data['inner_layout']['margins_y'] === 'small',
@@ -102,7 +106,7 @@
           </div>
         </div>
       </div>
-    <!-- </div> -->
+    </div>
   </div>
 </template>
 

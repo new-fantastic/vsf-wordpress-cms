@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  height: 100%;
 }
 
 * {
@@ -32,6 +33,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 body {
+  height: 100%;
   line-height: 1.5;
   overflow-x: hidden;
 }
