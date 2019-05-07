@@ -1,17 +1,25 @@
 <template>
     <section
-        :class="sectionName"
+        class="container padding__y--sm"
         v-if="success === true"
     >
         <div
-            class="column"
-            v-for="(column, index) in columns"
-            :key="index"
+            class="container__inner"
+            :class="[
+                sectionName,
+                { 'container__inner--boxed' : data.section_options.margins.margins_x === true  }
+            ]"
         >
-            <component
-            :is="column.cmpName"
-            :data="column"
-            />
+            <div
+                class="column"
+                v-for="(column, index) in columns"
+                :key="index"
+            >
+                <component
+                :is="column.cmpName"
+                :data="column"
+                />
+            </div>
         </div>
   </section>
   <NotFound v-else-if="success === false"/>
@@ -37,7 +45,8 @@
                 columns: [],
                 columnAmount: null,
                 success: null,
-                sectionName: null
+                sectionName: null,
+                sectionOptions: null
             }
         },
         created () {

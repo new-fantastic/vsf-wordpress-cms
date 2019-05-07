@@ -1,11 +1,44 @@
 <template>
-  <div v-if="wpData !== null" class="staticpage page__wrapper container" :key="wpData.id">
-    <breadcrumbs :routes="breadcrumbs.routes" :active-route="wpData.title.rendered" />
-    <div class="staticpage__heading">
-      <h1 class="staticpage__title" v-html="wpData.title.rendered"/>
+  <div
+    v-if="wpData !== null"
+    class="page"
+    :key="wpData.id"
+  >
+    <div
+      class="page__heading margin__y--sm"
+    >
+      <div
+        class="page__breadcrumbs"
+      >
+        <!-- <breadcrumbs
+          :routes="breadcrumbs.routes"
+          :active-route="wpData.title.rendered"
+        /> -->
+      </div>
+      <h1
+        class="page__title"
+        :class="{
+          'text-align__left' : wpData.acf.page_options.page_title.alignment === 'left',
+          'text-align__center' : wpData.acf.page_options.page_title.alignment === 'center',
+          'text-align__right' : wpData.acf.page_options.page_title.alignment === 'right'
+        }"
+        v-if="wpData.acf.page_options.page_title.visibility === true"
+        v-html="wpData.title.rendered"
+      />
     </div>
-    <Sections v-if="wpData" :data="wpData"/>
-    <p v-else>{{ $t('Not found') }}</p>
+    <div
+      class="page__content"
+    >
+      <Sections
+        v-if="wpData"
+        :data="wpData"
+      />
+      <p
+        v-else
+      >
+        {{ $t('Not found') }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -83,33 +116,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-// @import "~theme/css/kubota/base/typography";
-// @import "~theme/css/kubota/base/animations";
-
-.staticpage {
-  .section-wp {
-    margin: 5rem auto;
-    @media all and (max-width: 980px) {
-      margin: 3rem auto;
-    }
-  }
-}
-
-.staticpage__heading {
-  padding: 3rem 0;
-
-  .staticpage__title {
-    // @extend .heading-md;
-    text-align: center;
-  }
-}
-
-.section-wp {
-  margin: 5rem auto;
-  @media all and (max-width: 980px) {
-    margin: 3rem auto;
-  }
-}
-</style>
