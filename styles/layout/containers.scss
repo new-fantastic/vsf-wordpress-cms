@@ -1,0 +1,16 @@
+.container {
+  box-sizing: border-box;
+  width: 100%;
+
+  &__inner {
+    width: 100%;
+    margin: auto;
+    
+    &--boxed {
+      width: 90%;
+      margin: auto;
+      max-width: 1440px;
+      margin: auto;
+    }
+  }
+}

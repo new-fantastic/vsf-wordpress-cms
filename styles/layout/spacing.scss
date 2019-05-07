@@ -1,0 +1,199 @@
+@import '../core/variables/proportions.scss';
+
+.margin {
+
+  &__x {
+
+    &--sm {
+      margin-left: $gap-sm;
+      margin-right: $gap-sm;
+    }
+
+    &--md {
+      margin-left: $gap-md;
+      margin-right: $gap-md;
+    }
+
+    &--lg {
+      margin-left: $gap-lg;
+      margin-right: $gap-lg;
+    }
+  }
+
+  &__y {
+
+    &--sm {
+      margin-top: $gap-sm;
+      margin-bottom: $gap-sm;
+    }
+
+    &--md {
+      margin-top: $gap-md;
+      margin-bottom: $gap-md;
+    }
+
+    &--lg {
+      margin-top: $gap-lg;
+      margin-bottom: $gap-lg;
+    }
+  }
+
+  &__left {
+
+    &--sm {
+      margin-left: $gap-sm;
+    }
+
+    &--md {
+      margin-left: $gap-md;
+    }
+
+    &--lg {
+      margin-left: $gap-lg;
+    }
+  }
+
+  &__right {
+
+    &--sm {
+      margin-right: $gap-sm;
+    }
+
+    &--md {
+      margin-right: $gap-md;
+    }
+
+    &--lg {
+      margin-right: $gap-lg;
+    }
+  }
+
+  &__top {
+
+    &--sm {
+      margin-top: $gap-sm;
+    }
+
+    &--md {
+      margin-top: $gap-md;
+    }
+
+    &--lg {
+      margin-top: $gap-lg;
+    }
+  }
+
+  &__bottom {
+
+    &--sm {
+      margin-bottom: $gap-sm;
+    }
+
+    &--md {
+      margin-bottom: $gap-md;
+    }
+
+    &--lg {
+      margin-bottom: $gap-lg;
+    }
+  }
+}
+
+.padding {
+
+  &__x {
+
+    &--sm {
+      padding-left: $gap-sm;
+      padding-right: $gap-sm;
+    }
+
+    &--md {
+      padding-left: $gap-md;
+      padding-right: $gap-md;
+    }
+
+    &--lg {
+      padding-left: $gap-lg;
+      padding-right: $gap-lg;
+    }
+  }
+
+  &__y {
+
+    &--sm {
+      padding-top: $gap-sm;
+      padding-bottom: $gap-sm;
+    }
+
+    &--md {
+      padding-top: $gap-md;
+      padding-bottom: $gap-md;
+    }
+
+    &--lg {
+      padding-top: $gap-lg;
+      padding-bottom: $gap-lg;
+    }
+  }
+
+  &__left {
+
+    &--sm {
+      padding-left: $gap-sm;
+    }
+
+    &--md {
+      padding-left: $gap-md;
+    }
+
+    &--lg {
+      padding-left: $gap-lg;
+    }
+  }
+
+  &__right {
+
+    &--sm {
+      padding-right: $gap-sm;
+    }
+
+    &--md {
+      padding-right: $gap-md;
+    }
+
+    &--lg {
+      padding-right: $gap-lg;
+    }
+  }
+
+  &__top {
+
+    &--sm {
+      padding-top: $gap-sm;
+    }
+
+    &--md {
+      padding-top: $gap-md;
+    }
+
+    &--lg {
+      padding-top: $gap-lg;
+    }
+  }
+
+  &__bottom {
+
+    &--sm {
+      padding-bottom: $gap-sm;
+    }
+
+    &--md {
+      padding-bottom: $gap-md;
+    }
+
+    &--lg {
+      padding-bottom: $gap-lg;
+    }
+  }
+}

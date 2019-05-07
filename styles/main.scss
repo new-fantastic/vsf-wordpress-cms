@@ -1,5 +1,12 @@
+/******* Core ******/
+
 @import 'core/reset.scss';
-@import 'core/typography.scss';
+
+@import 'core/typography/headings.scss';
+@import 'core/typography/lists.scss';
+@import 'core/typography/paragraphs.scss';
+@import 'core/typography/tables.scss';
+
 @import 'core/utilities/helpers.scss';
 
 @import 'core/variables/colors.scss';
@@ -7,7 +14,11 @@
 
 @import 'core/mixins/transitions.scss';
 
+/******* Layout ******/
+
 @import 'layout/columns.scss';
-@import 'layout/section.scss';
+@import 'layout/containers.scss';
+@import 'layout/page.scss';
 @import 'layout/positions.scss';
+@import 'layout/section.scss';
 @import 'layout/spacing.scss';

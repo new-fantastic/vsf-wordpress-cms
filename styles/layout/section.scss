@@ -1,0 +1,9 @@
+section {
+  &.one-col-layout,
+  &.two-col-layout,
+  &.three-col-layout,
+  &.four-col-layout {
+    box-sizing: border-box;
+    max-width: 100vw;
+  }
+}
