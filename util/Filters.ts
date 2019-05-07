@@ -1,22 +1,19 @@
-export const getColumnAmountAndPrefix = (data: object) => {
+export const getColumnAmount = (data: string) => {
 
-  const key = Object.keys(data).filter(v => v != "acf_fc_layout")
-  if(key.length < 1) {
-    throw new Error('There is not layout object in given data')
-    return
-  }
+  // const key = Object.keys(data).filter(v => v != "acf_fc_layout")
+  // if(key.length < 1) {
+  //   throw new Error('There is not layout object in given data')
+  //   return
+  // }
 
-  const regex = /wp_(\d+)_col_layout/.exec(key[0])
+  const regex = /section_(\d+)_col/.exec(data)
             
-  if (regex === null || regex.length < 2) {
-    throw new Error('Given data has badly named key for layout configuration')
-    return
-  }
+  // if (regex === null || regex.length < 2) {
+  //   throw new Error('Given data has badly named key for layout configuration')
+  //   return
+  // }
 
-  return {
-    columns: Number(regex[1]),
-    prefix: regex[0] + '_'
-  }
+  return  Number(regex[1])
 }
 
 export const layoutNameToCmpName = (layoutName: string): string => {
@@ -28,6 +25,10 @@ export const prepareColumnToRow = (base: Object, columnAmount: Number): Object =
   const sectionData = Array.isArray(base)
     ? base[0]
     : base
+
+  if(!sectionData || !('acf_fc_layout' in sectionData)) {
+    throw new Error('Allocated more columns than provided')
+  }
 
   sectionData.cmpName = layoutNameToCmpName(sectionData.acf_fc_layout)
   sectionData.columnAmount = columnAmount

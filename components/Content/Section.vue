@@ -34,7 +34,7 @@
 <script>
     import blocks from '../blocks'
     import { getLangByRoute } from '../../util/GetLang'
-    import { getColumnAmountAndPrefix, layoutNameToCmpName, prepareColumnToRow } from '../../util/Filters'
+    import { getColumnAmount, layoutNameToCmpName, prepareColumnToRow } from '../../util/Filters'
     import NumberToWord from '../../util/NumberToWord'
 
     export default {
@@ -57,14 +57,13 @@
         },
         created () {
             try {
-                const { columns, prefix } = getColumnAmountAndPrefix(this.data)
-                const columnsKey = prefix + 'content'
-                this.columnAmount = columns
+                this.columnAmount = getColumnAmount(this.data.acf_fc_layout)
                 this.sectionName = NumberToWord(this.columnAmount).toLowerCase() + '-col-layout'
+                const columns = this.data['section_content']
 
                 for(let i = 1; i <= this.columnAmount; i++) {
                     this.columns.push(
-                        prepareColumnToRow(this.data[columnsKey][prefix + i], this.columnAmount)
+                        prepareColumnToRow(columns['column_' + i], this.columnAmount)
                     )
                 }
 
