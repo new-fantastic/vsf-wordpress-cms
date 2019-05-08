@@ -2,6 +2,41 @@
 
 .margin {
 
+  & {
+
+    &--xs {
+      margin: $gap-xs;
+    }
+
+    &--sm {
+      margin: $gap-sm;
+      @media all and (max-width: 767px) {
+        margin: $gap-xs;
+      }
+    }
+
+    &--md {
+      margin: $gap-md;
+      @media all and (max-width: 767px) {
+        margin: $gap-xs;
+      }
+    }
+
+    &--lg {
+      margin: $gap-lg;
+      @media all and (max-width: 767px) {
+        margin: $gap-sm;
+      }
+    }
+
+    &--xl {
+      margin: $gap-lg;
+      @media all and (max-width: 767px) {
+        margin: $gap-sm;
+      }
+    }
+  }
+
   &__x {
 
     &--sm {
@@ -160,6 +195,41 @@
 }
 
 .padding {
+
+  & {
+
+    &--xs {
+      margin: $gap-xs;
+    }
+
+    &--sm {
+      margin: $gap-sm;
+      @media all and (max-width: 767px) {
+        margin: $gap-xs;
+      }
+    }
+
+    &--md {
+      margin: $gap-md;
+      @media all and (max-width: 767px) {
+        margin: $gap-xs;
+      }
+    }
+
+    &--lg {
+      margin: $gap-lg;
+      @media all and (max-width: 767px) {
+        margin: $gap-sm;
+      }
+    }
+
+    &--xl {
+      margin: $gap-lg;
+      @media all and (max-width: 767px) {
+        margin: $gap-sm;
+      }
+    }
+  }
 
   &__x {
 
