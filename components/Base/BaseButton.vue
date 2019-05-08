@@ -1,14 +1,14 @@
 <template>
   <button 
+    class="btn flex position-x--center position-y--center"
     v-bind="$attrs"
-    class="flex position-x--center position-y--center"
     :class="{
-    'btn': true,
-    'btn--sm': size === 'sm',
-    'btn--lg': size === 'lg',
-    'btn--full': size === 'full',
-    'btn--bordered': type === 'bordered'
-  }">
+      'btn--sm': size === 'sm',
+      'btn--lg': size === 'lg',
+      'btn--full': size === 'full',
+      'btn--bordered': type === 'bordered'
+    }"
+  >
     <router-link
       v-if="link !== '' && externalLink === false"
       :to="link"
