@@ -1,13 +1,15 @@
+@import '../variables/colors.scss';
+
 .text {
 
   &__color {
     
     &--light {
-      color: #fff;
+      color: $color-light;
     }
 
     &--dark {
-      color: #000;
+      color: $color-dark;
     }
   }
 

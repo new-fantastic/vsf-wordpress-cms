@@ -25,3 +25,33 @@
     }
   }
 }
+
+.align-self {
+
+  &--top {
+    align-self: flex-start;
+  }
+
+  &--center {
+    align-self: center;
+  }
+
+  &--bottom {
+    align-self: flex-end;
+  }
+}
+
+.justify-self {
+
+  &--left {
+    justify-self: flex-start;
+  }
+
+  &--center {
+    justify-self: center;
+  }
+
+  &--right {
+    justify-self: flex-end;
+  }
+}

@@ -23,11 +23,11 @@
 
   /* Grid (for newer browsers) */
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: $gap-md;
   @media all and (max-width: 980px) {
     grid-gap: $gap-sm;
-    grid-template-columns: repeat(1, auto);
+    grid-template-columns: 1fr;
     justify-content: center;
   }
   @media all and (max-width: 767px) {
@@ -53,15 +53,15 @@
   
   /* Grid (for newer browsers) */
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: $gap-md;
   @media all and (max-width: 980px) {
     grid-gap: $gap-sm;
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(2, 1fr);
   }
   @media all and (max-width: 767px) {
     grid-gap: $gap-xs;
-    grid-template-columns: repeat(1, auto);
+    grid-template-columns: repeat(1, 1fr);
     justify-content: center;
   }
   
@@ -89,15 +89,15 @@
   
   /* Grid (for newer browsers) */
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: $gap-md;
   @media all and (max-width: 980px) {
     grid-gap: $gap-sm;
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(2, 1fr);
   }
   @media all and (max-width: 767px) {
     grid-gap: $gap-xs;
-    grid-template-columns: repeat(1, auto);
+    grid-template-columns: repeat(1, 1fr);
     justify-content: center;
   }
   
