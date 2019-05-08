@@ -4,13 +4,6 @@
   >
     <div
       class="banner__inner"
-      :class="{
-        'padding--xs' : data.inner_layout.padding === 'xs',
-        'padding--sm' : data.inner_layout.padding === 'sm',
-        'padding--md' : data.inner_layout.padding === 'md',
-        'padding--lg' : data.inner_layout.padding === 'lg',
-        'padding--xl' : data.inner_layout.padding === 'xl',
-      }"
     >
       <div
         class="banner__background flex"
@@ -43,6 +36,11 @@
         <div
           class="banner__content__inner flex"
           :class="{
+            'padding--xs' : data.inner_layout.padding === 'xs',
+            'padding--sm' : data.inner_layout.padding === 'sm',
+            'padding--md' : data.inner_layout.padding === 'md',
+            'padding--lg' : data.inner_layout.padding === 'lg',
+            'padding--xl' : data.inner_layout.padding === 'xl',
             'position-x--left' :
               data['inner_layout']['text_position_x'] === 'left',
             'position-x--center' :
