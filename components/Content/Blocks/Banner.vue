@@ -41,7 +41,7 @@
           }"
       >
         <div
-          class="banner__description flex"
+          class="banner__content__inner flex"
           :class="{
             'position-x--left' :
               data['inner_layout']['text_position_x'] === 'left',
@@ -58,7 +58,11 @@
           }"
         >
           <div
-            class="banner__description--inner"
+            class="banner__description"
+            :class="{
+              'text__color--light' : data.text_color === 'light',
+              'text__color--dark' : data.text_color === 'dark'
+            }"
           >
             <h2
               class="banner__title"
