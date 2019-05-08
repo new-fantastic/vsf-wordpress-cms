@@ -45,13 +45,16 @@
 
   &--left {
     justify-self: flex-start;
+    margin-right: auto;
   }
 
   &--center {
     justify-self: center;
+    margin: 0 auto;
   }
 
   &--right {
     justify-self: flex-end;
+    margin-left: auto;
   }
 }
