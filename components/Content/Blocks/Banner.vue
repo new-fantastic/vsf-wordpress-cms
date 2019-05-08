@@ -26,7 +26,7 @@
         </div>
       </div>
       <div
-        class="banner__content padding__y--lg"
+        class="banner__content"
         :class="{
           'boxed--inner' : data['inner_layout']['margins_x'],
           'margin-y--sm' : data['inner_layout']['margins_y'] === 'small',
