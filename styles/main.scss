@@ -1,28 +1,8 @@
 /******* Core ******/
 
 @import 'core/reset.scss';
-
-@import 'core/typography/headings.scss';
-@import 'core/typography/lists.scss';
-@import 'core/typography/paragraphs.scss';
-@import 'core/typography/tables.scss';
-
-@import 'core/utilities/flex.scss';
-@import 'core/utilities/grid.scss';
-@import 'core/utilities/helpers.scss';
-@import 'core/utilities/media.scss';
-@import 'core/utilities/text.scss';
-
-@import 'core/variables/colors.scss';
-@import 'core/variables/proportions.scss';
-
-@import 'core/mixins/transitions.scss';
-
-/******* Layout ******/
-
-@import 'layout/columns.scss';
-@import 'layout/containers.scss';
-@import 'layout/dimensions.scss';
-@import 'layout/page.scss';
-@import 'layout/positions.scss';
-@import 'layout/spacing.scss';
+@import 'core/typography/typography.scss';
+@import 'core/utilities/utilities.scss';
+@import 'core/variables/variables.scss';
+@import 'core/mixins/mixins.scss';
+@import 'layout/layout.scss';

@@ -1,4 +1,4 @@
-@import '../core/variables/proportions.scss';
+@import '../core/variables/variables.scss';
 
 .height {
 
@@ -60,7 +60,7 @@
   }
 
   &--100vh {
-    height: 100vh;
+    height: 100vh !important;
     @media all and (max-width: 980px) {
       min-height: $height-100vh;
     }

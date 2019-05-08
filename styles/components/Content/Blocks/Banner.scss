@@ -1,3 +1,6 @@
+@import '../../../layout/layout.scss';
+@import '../../../core/variables/variables.scss';
+
 .banner {
 	height: 100%;
 	width: 100%;
@@ -32,6 +35,12 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    @extend .container__inner--boxed;
+    @extend .padding__x--md;
+    @media all and (min-width: calc(#{$width-boxed} + 2.1rem)) {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
 
     &__inner {
       height: 100%;
