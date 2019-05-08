@@ -1,10 +1,11 @@
-@import '../core/variables/proportions.scss';
+@import '../core/variables/variables.scss';
 
 .container {
   box-sizing: border-box;
   width: 100%;
 
   &__inner {
+    // display: flex;
     height: 100%;
     width: 100%;
     margin: auto;
@@ -12,7 +13,7 @@
     &--boxed {
       width: calc(100% - #{$gap-lg});
       margin: auto;
-      max-width: 1770px;
+      max-width: $width-boxed;
       margin: auto;
       @media all and (max-width: 767px) {
         width: calc(100% - #{$gap-sm});
