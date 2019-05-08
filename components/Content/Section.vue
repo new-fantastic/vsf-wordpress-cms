@@ -26,13 +26,16 @@
             ]"
         >
             <div
-                class="column"
+                class="column flex"
                 v-for="(column, index) in columns"
                 :key="index"
             >
                 <component
                 :is="column.cmpName"
                 :data="column"
+                :class="{
+                    'width--100' : columnAmount === 1
+                }"
                 />
             </div>
         </div>

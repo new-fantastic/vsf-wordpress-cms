@@ -199,34 +199,34 @@
   & {
 
     &--xs {
-      margin: $gap-xs;
+      padding: $gap-xs;
     }
 
     &--sm {
-      margin: $gap-sm;
+      padding: $gap-sm;
       @media all and (max-width: 767px) {
-        margin: $gap-xs;
+        padding: $gap-xs;
       }
     }
 
     &--md {
-      margin: $gap-md;
+      padding: $gap-md;
       @media all and (max-width: 767px) {
-        margin: $gap-xs;
+        padding: $gap-xs;
       }
     }
 
     &--lg {
-      margin: $gap-lg;
+      padding: $gap-lg;
       @media all and (max-width: 767px) {
-        margin: $gap-sm;
+        padding: $gap-sm;
       }
     }
 
     &--xl {
-      margin: $gap-lg;
+      padding: $gap-lg;
       @media all and (max-width: 767px) {
-        margin: $gap-sm;
+        padding: $gap-sm;
       }
     }
   }
