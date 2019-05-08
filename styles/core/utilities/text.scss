@@ -1,0 +1,28 @@
+.text {
+
+  &__color {
+    
+    &--light {
+      color: #fff;
+    }
+
+    &--dark {
+      color: #000;
+    }
+  }
+
+  &__align {
+
+    &--left {
+      text-align: left;
+    }
+  
+    &_--center {
+      text-align: center;
+    }
+  
+    &--right {
+      text-align: right;
+    }
+  }
+}

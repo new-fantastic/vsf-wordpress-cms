@@ -7,37 +7,6 @@
   }
 }
 
-.text-align {
-
-  &__left {
-    text-align: left;
-  }
-
-  &__center {
-    text-align: center;
-  }
-
-  &__right {
-    text-align: right;
-  }
-}
-
 .no-scroll {
   overflow-y: hidden;
-}
-
-.desktop {
-  @media all and (max-width: 980px) {
-    display: none !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-}
-
-.mobile {
-  @media all and (min-width: 981px) {
-    display: none !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
 }

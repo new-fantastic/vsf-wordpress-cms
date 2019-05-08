@@ -59,6 +59,10 @@
         >
           <div
             class="banner__description"
+            :class="{
+              'text__color--light' : data.text_color === 'light',
+              'text__color--dark' : data.text_color === 'dark'
+            }"
           >
             <h2
               class="banner__title"
