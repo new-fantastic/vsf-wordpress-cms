@@ -25,11 +25,14 @@
             <div
                 class="column flex"
                 :class="{
-                    'column__mobile--sm' : data.section_content['column_' + (index+1)].column_options.height.mobile === 'sm', 
-                    'column__mobile--md' : data.section_content['column_' + (index+1)].column_options.height.mobile === 'md', 
-                    'column__mobile--lg' : data.section_content['column_' + (index+1)].column_options.height.mobile === 'lg', 
-                    'column__mobile--xl' : data.section_content['column_' + (index+1)].column_options.height.mobile === 'xl', 
-                    'column__mobile--100vh' : data.section_content['column_' + (index+1)].column_options.height.mobile === '100vh', 
+                    'height--xs' : data.section_content['column_' + (index+1)].column_options.height.mobile === 'xs', 
+                    'height--sm' : data.section_content['column_' + (index+1)].column_options.height.mobile === 'sm', 
+                    'height--md' : data.section_content['column_' + (index+1)].column_options.height.mobile === 'md', 
+                    'height--lg' : data.section_content['column_' + (index+1)].column_options.height.mobile === 'lg', 
+                    'height--xl' : data.section_content['column_' + (index+1)].column_options.height.mobile === 'xl', 
+                    'height--auto' : data.section_content['column_' + (index+1)].column_options.height.desktop === 'auto', 
+                    'height--50vh' : data.section_content['column_' + (index+1)].column_options.height.desktop === '50', 
+                    'height--100vh' : data.section_content['column_' + (index+1)].column_options.height.desktop === '100'
                 }"
                 v-for="(column, index) in columns"
                 :key="index"
@@ -75,15 +78,13 @@
                 columnAmount: null,
                 success: null,
                 sectionName: null,
-                sectionOptions: null,
                 anyFilledColumn: false
             }
         },
         created () {
             try {
-                // console.log(this.data)
                 this.columnAmount = getColumnAmount(this.data.acf_fc_layout)
-                this.sectionName = NumberToWord(this.columnAmount).toLowerCase() + '-col-layout'
+                this.sectionName = `grid__${this.columnAmount}-col`
                 const columns = this.data['section_content']
 
                 for(let i = 1; i <= this.columnAmount; i++) {
