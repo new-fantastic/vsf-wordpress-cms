@@ -108,9 +108,10 @@
                 }"
                 :size="button['button_size']"
                 :link="button['button_link']"
-                v-html="button['button_label']"
                 :externalLink="externalLink[index]"
-              />
+              >
+                {{ button['button_label'] }}
+              </BaseButton>
             </div>
           </div>
         </div>
