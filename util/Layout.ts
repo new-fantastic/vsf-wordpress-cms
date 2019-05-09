@@ -14,7 +14,7 @@ export const prepareColumnToRow = (base: any, columnAmount: Number): Object => {
     : base.column_content
 
   if(!sectionData || !('acf_fc_layout' in sectionData)) {
-    throw new Error('Allocated more columns than provided')
+    return false
   }
 
   sectionData.cmpName = layoutNameToCmpName(sectionData.acf_fc_layout)

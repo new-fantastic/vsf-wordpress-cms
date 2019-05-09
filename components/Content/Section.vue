@@ -1,7 +1,7 @@
 <template>
     <section
         class="section container"
-        v-if="success === true"
+        v-if="success === true && anyFilledColumn"
     >
         <div
             class="container__inner"
@@ -36,12 +36,17 @@
             >
                 <component
                     :is="column.cmpName"
+                    v-if="column !== false"
                     :data="column"
                     :class="{
                         'width--100' : columnAmount === 1,
                         'desktop--hidden' : data.section_content['column_' + (index+1)].column_options.visibility.desktop === 'hidden',
                         'mobile--hidden' : data.section_content['column_' + (index+1)].column_options.visibility.mobile === 'hidden'
                     }"
+                />
+                <div 
+                    v-else
+                    class='empty-column'
                 />
             </div>
         </div>
@@ -70,7 +75,8 @@
                 columnAmount: null,
                 success: null,
                 sectionName: null,
-                sectionOptions: null
+                sectionOptions: null,
+                anyFilledColumn: false
             }
         },
         created () {
@@ -81,15 +87,21 @@
                 const columns = this.data['section_content']
 
                 for(let i = 1; i <= this.columnAmount; i++) {
-                    this.columns.push(
-                        prepareColumnToRow(columns['column_' + i], this.columnAmount)
-                    )
+                    const prepared = prepareColumnToRow(columns['column_' + i], this.columnAmount)
+                    if(prepared === false) {
+                        this.columns.push(false)
+                    } else {
+                        this.columns.push(prepared)
+                        if(!this.anyFilledColumn) {
+                            this.anyFilledColumn = true
+                        }
+                    }
                 }
 
                 this.success = true
             } catch(e) {
                 this.success = false
-                console.error(e.message)
+                console.error('H', e.message)
             }
         }
     }
