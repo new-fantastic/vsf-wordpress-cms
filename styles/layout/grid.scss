@@ -25,7 +25,7 @@
             min-height: 30vh;
           }
           &__mobile--md {
-            min-height: 50vh;
+            min-height: 60vh;
           }
           &__mobile--lg {
             min-height: 100vh;
@@ -39,13 +39,19 @@
         }
         @media all and (max-width: 767px) {
           &__mobile--sm {
-            min-height: 45vh;
+            min-height: 45vw;
           }
           &__mobile--md {
             min-height: 90vw;
           }
           &__mobile--lg {
-            min-height: 120vh;
+            min-height: 120vw;
+          }
+          &__mobile--xl {
+            min-height: 150vw;
+          }
+          &__mobile--100vh {
+            min-height: 100vh;
           }
         }
       }
@@ -72,9 +78,15 @@
               min-height: 30vh;
             }
             &__mobile--md {
-              min-height: 50vh;
+              min-height: 60vh;
             }
             &__mobile--lg {
+              min-height: 100vh;
+            }
+            &__mobile--50vh {
+              min-height: 50vh
+            }
+            &__mobile--100vh {
               min-height: 100vh;
             }
           }
@@ -93,7 +105,7 @@
               min-height: 150vw;
             }
             &__mobile--100vh {
-              min-height: 150vh;
+              min-height: 100vh;
             }
           }
         }
@@ -125,9 +137,15 @@
             min-height: 30vh;
           }
           &__mobile--md {
-            min-height: 50vh;
+            min-height: 60vh;
           }
           &__mobile--lg {
+            min-height: 100vh;
+          }
+          &__mobile--50vh {
+            min-height: 50vh
+          }
+          &__mobile--100vh {
             min-height: 100vh;
           }
           &:last-child {
@@ -138,13 +156,19 @@
         @media all and (max-width: 767px) {
           flex-basis: 100%;
           &__mobile--sm {
-            min-height: 45vh;
+            min-height: 45vw;
           }
           &__mobile--md {
-            min-height: 90vh;
+            min-height: 90vw;
           }
           &__mobile--lg {
-            min-height: 120vh;
+            min-height: 120vw;
+          }
+          &__mobile--xl {
+            min-height: 150vw;
+          }
+          &__mobile--100vh {
+            min-height: 100vh;
           }
         }
       }
@@ -177,22 +201,34 @@
               min-height: 30vh;
             }
             &__mobile--md {
-              min-height: 50vh;
+              min-height: 60vh;
             }
             &__mobile--lg {
+              min-height: 100vh;
+            }
+            &__mobile--50vh {
+              min-height: 50vh
+            }
+            &__mobile--100vh {
               min-height: 100vh;
             }
           }
           @media all and (max-width: 767px) {
             flex-basis: 100%;
             &__mobile--sm {
-              min-height: 45vh;
+              min-height: 45vw;
             }
             &__mobile--md {
-              min-height: 90vh;
+              min-height: 90vw;
             }
             &__mobile--lg {
-              min-height: 120vh;
+              min-height: 120vw;
+            }
+            &__mobile--xl {
+              min-height: 150vw;
+            }
+            &__mobile--100vh {
+              min-height: 100vh;
             }
           }
         }

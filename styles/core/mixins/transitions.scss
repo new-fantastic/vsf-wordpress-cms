@@ -1,11 +1,37 @@
-@mixin transition-slow-ease-out {
-  transition: all .5s ease-out;
+@import '../variables/variables.scss';
+
+@mixin transition__ease-out--slow {
+  transition: $transition-ease-out-slow;
 }
 
-@mixin transition-normal-ease-out {
-  transition: all .3s ease-out;
+@mixin transition__ease-out--medium {
+  transition: $transition-ease-out-medium;
 }
 
-@mixin transition-fast-ease-out {
-  transition: all .1s ease-out;
+@mixin transition__ease-out--fast {
+  transition: $transition-ease-out-fast;
+}
+
+@mixin transition__ease-in--slow {
+  transition: $transition-ease-in-slow;
+}
+
+@mixin transition__ease-in--medium {
+  transition: $transition-ease-in-medium;
+}
+
+@mixin transition__ease-in--fast {
+  transition: $transition-ease-in-fast;
+}
+
+@mixin transition__ease-in-out--slow {
+  transition: $transition-ease-in-out-slow;
+}
+
+@mixin transition__ease-in-out--medium {
+  transition: $transition-ease-in-out-medium;
+}
+
+@mixin transition__ease-in-out--fast {
+  transition: $transition-ease-in-out-fast;
 }
