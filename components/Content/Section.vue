@@ -1,9 +1,6 @@
 <template>
     <section
         class="section container"
-        :class="{ 
-            
-        }"
         v-if="success === true"
     >
         <div
@@ -27,15 +24,24 @@
         >
             <div
                 class="column flex"
+                :class="{
+                    'column__mobile--sm' : data.column_options.height.mobile === 'sm', 
+                    'column__mobile--md' : data.column_options.height.mobile === 'md', 
+                    'column__mobile--lg' : data.column_options.height.mobile === 'lg', 
+                    'column__mobile--xl' : data.column_options.height.mobile === 'xl', 
+                    'column__mobile--100vh' : data.column_options.height.mobile === '100vh', 
+                }"
                 v-for="(column, index) in columns"
                 :key="index"
             >
                 <component
-                :is="column.cmpName"
-                :data="column"
-                :class="{
-                    'width--100' : columnAmount === 1
-                }"
+                    :is="column.cmpName"
+                    :data="column.column_content"
+                    :class="{
+                        'width--100' : columnAmount === 1,
+                        'desktop--hidden' : data.column_options.visibility.desktop === 'hidden',
+                        'mobile--hidden' : data.column_options.visibility.mobile === 'hidden'
+                    }"
                 />
             </div>
         </div>
