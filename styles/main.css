@@ -83,6 +83,9 @@ a {
 a:focus, a:hover, a:active {
   text-decoration: none;
 }
+a:focus::after, a:hover::after, a:active::after {
+  display: none;
+}
 
 img {
   max-width: 100%;
