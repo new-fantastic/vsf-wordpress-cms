@@ -1,13 +1,14 @@
-@import '../../core/mixins/transitions.scss';
+@import '../../core/utilities/utilities.scss';
+@import '../../core/variables/variables.scss';
 
 .btn {
+  font-family: inherit;
   font-size: 1.2rem;
   font-weight: 700;
   padding: 1rem 2rem;
-  @include transition-normal-ease-out;
+  @extend .transition__ease-out--slow;
   &:hover {
-    opacity: .9;
-    transform: scale(1.08);
+    opacity: .6;
   }
 
   &.dark {
