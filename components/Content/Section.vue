@@ -1,10 +1,7 @@
 <template>
     <section
         class="section container"
-        :class="{ 
-            
-        }"
-        v-if="success === true"
+        v-if="success === true && anyFilledColumn"
     >
         <div
             class="container__inner"
@@ -27,15 +24,29 @@
         >
             <div
                 class="column flex"
+                :class="{
+                    'column__mobile--sm' : data.section_content['column_' + (index+1)].column_options.height.mobile === 'sm', 
+                    'column__mobile--md' : data.section_content['column_' + (index+1)].column_options.height.mobile === 'md', 
+                    'column__mobile--lg' : data.section_content['column_' + (index+1)].column_options.height.mobile === 'lg', 
+                    'column__mobile--xl' : data.section_content['column_' + (index+1)].column_options.height.mobile === 'xl', 
+                    'column__mobile--100vh' : data.section_content['column_' + (index+1)].column_options.height.mobile === '100vh', 
+                }"
                 v-for="(column, index) in columns"
                 :key="index"
             >
                 <component
-                :is="column.cmpName"
-                :data="column"
-                :class="{
-                    'width--100' : columnAmount === 1
-                }"
+                    :is="column.cmpName"
+                    v-if="column !== false"
+                    :data="column"
+                    :class="{
+                        'width--100' : columnAmount === 1,
+                        'desktop--hidden' : data.section_content['column_' + (index+1)].column_options.visibility.desktop === 'hidden',
+                        'mobile--hidden' : data.section_content['column_' + (index+1)].column_options.visibility.mobile === 'hidden'
+                    }"
+                />
+                <div 
+                    v-else
+                    class='empty-column'
                 />
             </div>
         </div>
@@ -64,25 +75,33 @@
                 columnAmount: null,
                 success: null,
                 sectionName: null,
-                sectionOptions: null
+                sectionOptions: null,
+                anyFilledColumn: false
             }
         },
         created () {
             try {
+                // console.log(this.data)
                 this.columnAmount = getColumnAmount(this.data.acf_fc_layout)
                 this.sectionName = NumberToWord(this.columnAmount).toLowerCase() + '-col-layout'
                 const columns = this.data['section_content']
 
                 for(let i = 1; i <= this.columnAmount; i++) {
-                    this.columns.push(
-                        prepareColumnToRow(columns['column_' + i], this.columnAmount)
-                    )
+                    const prepared = prepareColumnToRow(columns['column_' + i], this.columnAmount)
+                    if(prepared === false) {
+                        this.columns.push(false)
+                    } else {
+                        this.columns.push(prepared)
+                        if(!this.anyFilledColumn) {
+                            this.anyFilledColumn = true
+                        }
+                    }
                 }
 
                 this.success = true
             } catch(e) {
                 this.success = false
-                console.error(e.message)
+                console.error('H', e.message)
             }
         }
     }
