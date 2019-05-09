@@ -8,10 +8,10 @@ export const layoutNameToCmpName = (layoutName: string): string => {
     .replace('_section', '')
 }
 
-export const prepareColumnToRow = (base: Object, columnAmount: Number): Object => {
-  const sectionData = Array.isArray(base)
-    ? base[0]
-    : base
+export const prepareColumnToRow = (base: any, columnAmount: Number): Object => {
+  const sectionData = Array.isArray(base.column_content)
+    ? base.column_content[0]
+    : base.column_content
 
   if(!sectionData || !('acf_fc_layout' in sectionData)) {
     throw new Error('Allocated more columns than provided')
