@@ -1,16 +1,16 @@
-@import url('https://cdn.jsdelivr.net/gh/new-fantastic/hajime/main.scss');
-@import url('https://cdn.jsdelivr.net/gh/new-fantastic/hajime/core/utilities/typography.scss');
+// @import url('https://cdn.jsdelivr.net/gh/new-fantastic/hajime/main.scss');
+// @import url('https://cdn.jsdelivr.net/gh/new-fantastic/hajime/core/utilities/typography.scss');
 @import '../../hajime/core/typography/typography.scss';
-@import '../../hajime/core/utilities/mixins/transitions.scss';
+@import '../../hajime/core/utilities/utilities.scss';
 
 .btn {
   font-family: inherit;
   font-size: 1.2rem;
-  // @extend .font__weight--bold;
+  @include font__weight--bold;
   padding: 1rem 2rem;
   @include transition__ease-out--slow;
   &:hover {
-    // @extend .opacity--md;
+    @include opacity--md;
   }
 
   &.dark {
