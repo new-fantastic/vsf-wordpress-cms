@@ -22,5 +22,11 @@ export const mutations: MutationTree<any> = {
   },
   [types.SET_LANG] (state, payload) {
     state.lang = payload
+  },
+  [types.SET_META_CONTENT] (state, { slotName, data }) {
+    state.meta = { 
+      ...state.meta,
+      [slotName ? slotName : 'base']: Array.isArray(data) ? data[0] : data
+    }
   }
 }

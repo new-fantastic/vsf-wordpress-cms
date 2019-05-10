@@ -4,5 +4,6 @@ export const state: WPRState = {
   pages: {},
   posts: {},
   menus: {},
-  lang: null
+  lang: null,
+  meta: {}
 }

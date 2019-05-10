@@ -46,9 +46,8 @@
 import rootStore from "@vue-storefront/store";
 import config from 'config'
 import Breadcrumbs from 'theme/components/core/Breadcrumbs.vue'
-// import { getLangByRoute } from '../util/Lang'
 import { ContentTypes } from '../types'
-import { getLangAndCmpName } from '../util/Lang'
+import { getLangByRoute, getLangAndCmpName } from '../util/Lang'
 
 export default {
   components: {
@@ -77,16 +76,9 @@ export default {
     }
   },
   metaInfo() {
-    // const headWpData = this.wpData()
     return {
       title: this.wpData.title.rendered,
-      meta: [
-        {
-          name: "description",
-          vmid: "description",
-          content: this.wpData.acf.meta_description
-        }
-      ]
+      meta: this.wpData.yoast_meta
     };
   },
   watch: {
@@ -113,6 +105,9 @@ export default {
         ? config.entities.category.includeFields
         : null
     });
+  },
+  mounted () {
+    console.log(this.$store.state)
   }
 };
 </script>

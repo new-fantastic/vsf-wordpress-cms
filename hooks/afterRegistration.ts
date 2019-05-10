@@ -6,12 +6,18 @@ import { getLangByRoute } from '../util/Lang'
 export function afterRegistration ({ Vue, store, isServer }) {
   AsyncDataLoader.push({
     execute: async ({ route }) => {
-      store.commit(`wp_rest_content/${SET_LANG}`, getLangByRoute(route))
+      const lang = getLangByRoute(route)
+
+      store.commit(`wp_rest_content/${SET_LANG}`, lang)
       
       // They'll be loaded in parallel
       await store.dispatch('wp_rest_content/loadMenu', {
         menuSlugs: config.wordpressCms.menus,
-        lang: getLangByRoute(route)
+        lang
+      })
+
+      await store.dispatch('wp_rest_content/loadMeta', {
+        lang
       })
     }
   })
