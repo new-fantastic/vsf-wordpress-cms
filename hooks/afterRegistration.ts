@@ -19,6 +19,10 @@ export function afterRegistration ({ Vue, store, isServer }) {
       await store.dispatch('wp_rest_content/loadMeta', {
         lang
       })
+
+      await store.dispatch('wpr_media/loadMedia', {
+        lang
+      })
     }
   })
 }

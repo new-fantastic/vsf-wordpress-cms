@@ -1,7 +1,7 @@
 @import url('https://cdn.jsdelivr.net/gh/new-fantastic/hajime/main.scss');
 @import url('https://cdn.jsdelivr.net/gh/new-fantastic/hajime/core/utilities/typography.scss');
-@import '../../hajime/core/utilities/typography.scss';
-@import '../../hajime/core/mixins/transitions.scss';
+@import '../../hajime/core/typography/typography.scss';
+@import '../../hajime/core/utilities/mixins/transitions.scss';
 
 .btn {
   font-family: inherit;
