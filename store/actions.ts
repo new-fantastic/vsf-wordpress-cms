@@ -23,7 +23,7 @@ const typeBaseMutation = {
 }
 
 export const actions = {
-  async loadContent ({state, commit}, {slug, type, lang}) {
+  async loadContent ({commit}, {slug, type, lang}) {
 
     const part = lang == 'pl' ? '' : '/' + lang
     const baseUrl = config.wordpressCms.url + part + typeBaseUrl[type]
@@ -45,7 +45,7 @@ export const actions = {
     }
   },
 
-  async loadMenu({state, commit}, {menuSlugs, lang}) {
+  async loadMenu({commit}, {menuSlugs, lang}) {
     const part = lang == 'pl' ? '' : '/' + lang
     const baseUrl = config.wordpressCms.url + part + typeBaseUrl[ContentTypes.Menu]
 
@@ -99,7 +99,7 @@ export const actions = {
     }
   },
 
-  async loadMeta ({state, commit}, lang) {
+  async loadMeta ({commit}) {
     const baseUrl = config.wordpressCms.url + typeBaseUrl[ContentTypes.Meta]
 
     try {
