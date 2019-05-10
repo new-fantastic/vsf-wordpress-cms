@@ -114,6 +114,6 @@
         width: 100%;
         display: flex;
     }
-    @import '../../styles/main.scss';
+    @import url('https://cdn.jsdelivr.net/gh/new-fantastic/hajime/main.css');
     @import '../../styles/components/Content/Section.scss';
 </style>

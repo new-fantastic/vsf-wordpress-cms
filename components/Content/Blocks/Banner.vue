@@ -150,6 +150,5 @@ export default {
 <style lang="scss">
 
   @import '../../../styles/components/Content/Blocks/Banner.scss';
-  // @import '../../../styles/main.scss';
 
 </style>
