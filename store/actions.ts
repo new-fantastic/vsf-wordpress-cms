@@ -11,13 +11,15 @@ import { type } from 'os';
 const typeBaseUrl = {
   [ContentTypes.Page]: '/wp-json/wp/v2/pages?slug=',
   [ContentTypes.Post]: '/wp-json/wp/v2/posts?slug=',
-  [ContentTypes.Menu]: '/wp-json/menus/v1/menus'
+  [ContentTypes.Menu]: '/wp-json/menus/v1/menus',
+  [ContentTypes.Meta]: '/wp-json'
 }
 
 const typeBaseMutation = {
   [ContentTypes.Page]: types.SET_PAGE_CONTENT,
   [ContentTypes.Post]: types.SET_POST_CONTENT,
-  [ContentTypes.Menu]: types.SET_MENU_CONTENT
+  [ContentTypes.Menu]: types.SET_MENU_CONTENT,
+  [ContentTypes.Meta]: types.SET_META_CONTENT,
 }
 
 export const actions = {
@@ -90,13 +92,30 @@ export const actions = {
           data: response.data,
           slotName: menuSlugs
         })
-      }
-      // if(response.data.status == 404 || response.data.length < 1) {
-      //   throw new Error('Endpoint ain\'t ready')
-      //    
+      } 
   
     } catch (err) {
       console.log('TU', err)
+    }
+  },
+
+  async loadMeta ({state, commit}, lang) {
+    const baseUrl = config.wordpressCms.url + typeBaseUrl[ContentTypes.Meta]
+
+    try {
+      const { data } = await axios.get(baseUrl)
+      commit(typeBaseMutation[ContentTypes.Meta], {
+        data: {
+          name: data.name,
+          description: data.description,
+          url: data.url,
+          home: data.home,
+          gmt_offset: data.gmt_offset,
+          timezone_string: data.timezone_string
+        }
+      })
+    } catch (err) {
+      console.log('TU2', err)
     }
   }
 

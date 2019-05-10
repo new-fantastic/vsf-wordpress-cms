@@ -105,6 +105,9 @@ export default {
         ? config.entities.category.includeFields
         : null
     });
+  },
+  mounted () {
+    console.log(this.$store.state)
   }
 };
 </script>
