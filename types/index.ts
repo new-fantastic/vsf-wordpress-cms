@@ -12,3 +12,7 @@ export enum ContentTypes {
   Menu,
   Meta
 }
+
+export interface WPRMediaState {
+  media: Object
+}

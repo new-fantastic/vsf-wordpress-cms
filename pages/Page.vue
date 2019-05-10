@@ -29,6 +29,7 @@
     <div
       class="page__content"
     >
+      <BaseMedia :id="416"/>
       <Sections
         v-if="wpData"
         :data="wpData"
@@ -48,11 +49,13 @@ import config from 'config'
 import Breadcrumbs from 'theme/components/core/Breadcrumbs.vue'
 import { ContentTypes } from '../types'
 import { getLangByRoute, getLangAndCmpName } from '../util/Lang'
+import BaseMedia from '../components/Base/BaseMedia.vue'
 
 export default {
   components: {
     Sections: () => import("../components/TheRoot.js"),
-    Breadcrumbs
+    Breadcrumbs,
+    BaseMedia
   },
 
   data () {
