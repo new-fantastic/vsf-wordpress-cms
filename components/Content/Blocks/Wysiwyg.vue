@@ -36,10 +36,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 
-  @import '../../../styles/hajime/main.min.css';
-  // @import url('https://cdn.jsdelivr.net/gh/new-fantastic/hajime/main.min.css');
+  @import '../../../styles/main.css';
 
   p {
     margin-bottom: 1rem;
