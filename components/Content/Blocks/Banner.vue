@@ -66,8 +66,11 @@
             <h2
               class="banner__title margin__bottom--ms"
               :class="{
-                'dark' : titleDark,
-                'light' : titleLight
+                'color--dark' : titleDark,
+                'color--light' : titleLight,
+                'text__align--left' : data.inner_layout.text_position_x === 'left',
+                'text__align--right' : data.inner_layout.text_position_x === 'right',
+                'text__align--center' : data.inner_layout.text_position_x === 'center'
               }"
               v-if="data['title']"
               v-html="data['title']"
@@ -75,8 +78,11 @@
             <div
               class="banner__subtitle"
               :class="{
-                'dark' : subtitleDark,
-                'light' : subtitleLight
+                'color--dark' : titleDark,
+                'color--light' : titleLight,
+                'text__align--left' : data.inner_layout.text_position_x === 'left',
+                'text__align--right' : data.inner_layout.text_position_x === 'right',
+                'text__align--center' : data.inner_layout.text_position_x === 'center'
               }"
               v-if="data['subtitle']"
               v-html="data['subtitle']"

@@ -1,6 +1,11 @@
 <template>
   <section
     class="section container"
+    :class="{
+      'margin__y--sm' : data.section_options.margins.margins_y === 'sm',
+      'margin__y--md' : data.section_options.margins.margins_y === 'md',
+      'margin__y--lg' : data.section_options.margins.margins_y === 'lg'
+    }"
     v-if="success === true && anyFilledColumn"
   >
     <div
@@ -9,9 +14,6 @@
         sectionName,
         { 
           'container__inner--boxed' : data.section_options.margins.margins_x === true,
-          'margin__y--sm' : data.section_options.margins.margins_y === 'sm',
-          'margin__y--md' : data.section_options.margins.margins_y === 'md',
-          'margin__y--lg' : data.section_options.margins.margins_y === 'lg',
           'height--100vh' : data.section_options.height === '100vh',
           'height--50vh' : data.section_options.height === '50vh',
           'height--xs' : data.section_options.height === 'xs',
