@@ -6,8 +6,11 @@
       'btn--sm': size === 'sm',
       'btn--lg': size === 'lg',
       'btn--full': size === 'full',
-      'btn--bordered': type === 'bordered'
+      'btn--bordered': type === 'bordered',
+      'background__color--dark color--light' : color === 'dark',
+      'background__color--light color--dark' : color === 'light'
     }"
+    style="font-family: inherit;"
   >
     <router-link
       v-if="link !== '' && externalLink === false"
@@ -34,6 +37,10 @@
 <script>
 export default {
   props: {
+    color: {
+      type: String,
+      default: 'dark'
+    },
     size: {
       type: String,
       default: 'sm'
@@ -63,20 +70,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 
-  .btn {
-    font-family: inherit;
-
-    &.dark {
-      color: #fff !important;
-      background-color: #000;
-    }
-
-    &.light {
-      color: #000 !important;
-      background-color: #fff;
-    }
-  }
+  @import '../../styles/main.css';
 
 </style>

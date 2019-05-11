@@ -149,21 +149,12 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 
-  @import '../../../styles/hajime/main.css';
-  // @import url('https://cdn.jsdelivr.net/gh/new-fantastic/hajime/main.css');
+  @import '../../../styles/main.css';
 
-  .banner {
-    
-    &__actions {
-
-      .btn {
-        &:last-of-type {
-          margin-right: 0;
-        }
-      }
-    }
+  .banner__actions .btn:last-of-type {
+    margin-right: 0;
   }
 
 </style>

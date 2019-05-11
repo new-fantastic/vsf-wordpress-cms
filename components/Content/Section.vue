@@ -111,7 +111,6 @@
 
 <style lang="scss">
 
-  // @import url('https://cdn.jsdelivr.net/gh/new-fantastic/hajime/main.css');
-  @import '../../styles/hajime/main.min.css';
+  @import '../../styles/main.css';
 
 </style>
