@@ -1,6 +1,6 @@
 <template>
   <button 
-    class="btn flex position-x--center position-y--center"
+    class="btn position--center font__size--ms font__weight--bold padding__y--xs padding__x--ms hover__opacity--md transition__ease-out--slow"
     v-bind="$attrs"
     :class="{
       'btn--sm': size === 'sm',
@@ -65,6 +65,18 @@ export default {
 
 <style lang="scss">
 
-  @import '../../styles/components/Base/BaseButton.scss';
+  .btn {
+    font-family: inherit;
+
+    &.dark {
+      color: #fff !important;
+      background-color: #000;
+    }
+
+    &.light {
+      color: #000 !important;
+      background-color: #fff;
+    }
+  }
 
 </style>
