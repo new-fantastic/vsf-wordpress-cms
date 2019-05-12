@@ -31,10 +31,12 @@ export default type => ({
       }
 
       const description = this.wpData.excerpt.rendered && this.wpData.excerpt.rendered.length > 0 
-        ? { vmid: 'description', name: 'description', content: this.wpData.excerpt.rendered }
+        ? { vmid: 'description', name: 'description', content: this.wpData.excerpt.rendered.replace(/<(?:.|\n)*?>/gm, '') }
         : {}
 
       let ogDesc = {}
+
+      console.log(description, 'DESC')
 
       if('content' in description) {
         ogDesc = { property: 'og:description', content: description.content }
@@ -43,9 +45,9 @@ export default type => ({
       return {
         title: this.wpData.title.rendered,
         meta: [
-          ...description,
+          description,
           { property: 'og:title', content: this.wpData.title.rendered },
-          ...ogDesc,
+          ogDesc,
           ...dt,
           { property: 'og:type', content: type}
         ]
