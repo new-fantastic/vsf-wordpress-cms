@@ -1,14 +1,14 @@
 <template>
   <div
     v-if="wpData !== null && wpData !== false"
-    class="page"
+    class="post"
     :key="wpData.id"
   >
     <div
-      class="page__heading margin__y--sm"
+      class="post__heading margin__y--sm"
     >
       <div
-        class="page__breadcrumbs"
+        class="post__breadcrumbs"
       >
         <!-- <breadcrumbs
           :routes="breadcrumbs.routes"
@@ -16,22 +16,25 @@
         /> -->
       </div>
       <h1
-        class="page__title"
-        :class="{
-          'text-align__left' : wpData.acf.page_options.page_title.alignment === 'left',
-          'text-align__center' : wpData.acf.page_options.page_title.alignment === 'center',
-          'text-align__right' : wpData.acf.page_options.page_title.alignment === 'right'
-        }"
-        v-if="wpData.acf.page_options.page_title.visibility === true"
+        class="post__title"
         v-html="wpData.title.rendered"
       />
     </div>
     <div
-      class="page__content"
+      class="post__content"
     >
-      <BaseMedia :id="416"/>
+      <div class="author">Autor: </div>
+      <div class="date">Data: {{ wpData.date_gmt.replace('T', ' ') }}</div>
+      <div class="tags">Tagi: 
+        <span v-for="(tag, index) in wpData.tags.slice(0, -1)" :key="index">
+          {{ tag }},&nbsp;
+        </span>
+        <span v-if="wpData.tags.length > 0">
+          {{ wpData.tags[wpData.tags.length - 1] }}
+        </span>
+      </div>
       <Sections
-        v-if="wpData"
+        v-if="wpData && wpData.acf && wpData.acf.sections !== null"
         :data="wpData"
       />
       <p
@@ -53,7 +56,7 @@ import BaseMedia from '../components/Base/BaseMedia.vue'
 import meta from '../mixins/meta'
 
 export default {
-  mixins: [meta('website')],
+  mixins: [meta('article')],
   components: {
     Sections: () => import("../components/TheRoot.js"),
     Breadcrumbs,
@@ -77,7 +80,7 @@ export default {
     wpData () {
       const { lang, langComponentName } = getLangAndCmpName(this.$route)
  
-      return this.$store.state.wp_rest_content.pages[this.$route.params.slug]
+      return this.$store.state.wp_rest_content.posts[this.$route.params.slug]
     }
   },
   watch: {
@@ -85,7 +88,7 @@ export default {
       await this.$store.dispatch("wp_rest_content/loadContent", {
         slug: to.params.slug,
         lang: getLangByRoute(to),
-        type: ContentTypes.Page
+        type: ContentTypes.Post
       });
     },
     wpData: {
@@ -104,7 +107,7 @@ export default {
     await store.dispatch("wp_rest_content/loadContent", {
       slug: route.params.slug,
       lang,
-      type: ContentTypes.Page
+      type: ContentTypes.Post
     });
 
     await store.dispatch("category/list", {

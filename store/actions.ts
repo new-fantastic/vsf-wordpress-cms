@@ -41,7 +41,11 @@ export const actions = {
       })
   
     } catch (err) {
-        // router.push('/page-not-found')
+      commit(typeBaseMutation[type], {
+        data: false,
+        slotName: slug
+      })
+      // router.push('/page-not-found')
     }
   },
 
@@ -53,12 +57,16 @@ export const actions = {
       const fixedItems = []
 
       for(let item of items) {
+        const prefix = item.object == 'page'
+          ? 'page'
+          : 'post'
+        
         fixedItems.push({
           ...item,
           url: item.url.replace(config.wordpressCms.url, k => {
             return config.wordpressCms.url.substr(-1) === '/'
-              ? '/info/'
-              : 'info/'
+              ? `/${prefix}/`
+              : `${prefix}/`
           })
         })
       }
