@@ -17,4 +17,4 @@ const moduleConfig: VueStorefrontModuleConfig = {
   router: { routes }
 }
 
-export const VsfWpRestContent = new VueStorefrontModule(moduleConfig)
+export const WpJson = new VueStorefrontModule(moduleConfig)
