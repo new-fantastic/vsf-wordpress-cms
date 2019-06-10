@@ -1,25 +1,29 @@
-import config from 'config'
+// import config from 'config'
 
-const lazyStaticPage = () => import('../pages/Page.vue')
-const lazyStaticPost = () => import('../pages/Post.vue')
+import { routes } from '@vue-wordpress/core/router/routes'
 
-interface PartialRoute {
-  name: string
-  path: string
-  component: Promise<Object>
-}
+export const preparedRoutes = routes()
 
-// const pagePrefix = config.wordpressCms.staticPagePrefix 
-//   ? config.wordpressCms.staticPagePrefix 
-//   : 'info'
-const pagePrefix = 'page'
-const postPrefix = 'post'
+// const lazyStaticPage = () => import('../pages/Page.vue')
+// const lazyStaticPost = () => import('../pages/Post.vue')
 
-// const pageName = config.wordpressCms.staticPageName 
-//   ? config.wordpressCms.staticPageName 
-//   : 'info'
+// interface PartialRoute {
+//   name: string
+//   path: string
+//   component: Promise<Object>
+// }
 
-export const routes = [
-  { name: pagePrefix, path: `/${pagePrefix}/:slug`, component: lazyStaticPage },
-  { name: postPrefix, path: `/${postPrefix}/:slug`, component: lazyStaticPost }
-]
+// // const pagePrefix = config.wordpressCms.staticPagePrefix 
+// //   ? config.wordpressCms.staticPagePrefix 
+// //   : 'info'
+// const pagePrefix = 'page'
+// const postPrefix = 'post'
+
+// // const pageName = config.wordpressCms.staticPageName 
+// //   ? config.wordpressCms.staticPageName 
+// //   : 'info'
+
+// export const routes = [
+//   { name: pagePrefix, path: `/${pagePrefix}/:slug`, component: lazyStaticPage },
+//   { name: postPrefix, path: `/${postPrefix}/:slug`, component: lazyStaticPost }
+// ]
