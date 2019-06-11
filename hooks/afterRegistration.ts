@@ -14,6 +14,10 @@ export function afterRegistration ({ Vue, store, isServer }) {
     router: true
   }
 
+  if('plugins' in config.wordpressCms) {
+    tmpCfg.plugins = config.wordpressCms.plugins
+  }
+
   Vue.use(WpJson, tmpCfg)
 
   AsyncDataLoader.push({
