@@ -13,15 +13,25 @@ import { menu } from '@vue-wordpress/core/store/menu'
 import { meta } from '@vue-wordpress/core/store/meta'
 import { page } from '@vue-wordpress/core/store/page'
 import { post } from '@vue-wordpress/core/store/post'
+import cfg from 'config'
 
 export const KEY = 'wp_rest_content'
 // export const MEDIA_KEY = 'wpr_media'
+
+let router: any = {
+  routes: <any>preparedRoutes
+}
+if ('router' in cfg.wordpressCms) {
+  if (cfg.wordpressCms.router === false) {
+    router = {}
+  }
+}
 
 const moduleConfig: VueStorefrontModuleConfig = {
   key: KEY,
   afterRegistration,
   router: { 
-    routes: <any>preparedRoutes
+    ...router
   },
   store: { modules: [
     { key: `${ModulePrefix}_config`, module: config },
