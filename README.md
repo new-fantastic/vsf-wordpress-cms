@@ -41,16 +41,51 @@ This will create a Git Submodule for your `vue-storefront` repository. Thanks to
 
 <br>
 
-### 2. Import and register the module inside `vue-storefront/src/modules/index.ts`
+After that, add module to modules/index.js:
 
 <br>
 
-```js
+```ts
 import { WpJson } from './vsf-wp-json'
-...
+
+//...
+
 export const registerModules: VueStorefrontModule[] = [
-...
-WpJson
-...
+  // ...
+    WpJson,
+  // ...
 ]
 ```
+
+<br>
+
+Open config file, then at the end of main object add:
+
+<br>
+
+```json
+"wordpressCms": {
+  "url": "https://your-wordpress-url.com/",
+  "lang": "en",
+  "menus": ["for-buyers", "footer"]
+}
+```
+
+<br>
+
+If you want to register plugin, you can do it by adding in **`wordpressCms`** - plugins, e.g.:
+
+<br>
+
+```json
+"wordpressCms": {
+  "url": "https://your-wordpress-url.com/",
+  "lang": "en",
+  "menus": ["for-buyers", "footer"],
+  "plugins": "acf"
+}
+```
+
+<br>
+
+Plugins should be inside `node_modules/@vue-wordpress`. They also should have **`vue-wp-json`** prefix.
