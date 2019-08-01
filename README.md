@@ -12,7 +12,7 @@ Go to your `vue-storefront`'s `modules` catalog and clone the repository with th
 
 ```bash
 cd ../vue-storefront/src/modules;
-git clone https://github.com/new-fantastic/vsf-wp-rest-api.git;
+git submodule add https://github.com/new-fantastic/vsf-wp-rest-api.git;
 ```
 
 #### b. Via `npm` / `yarn`
