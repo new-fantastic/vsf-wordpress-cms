@@ -1,4 +1,6 @@
-# vsf-wp-rest-api
+# vsf-wp-json
+
+<br>
 
 Wordpress REST API module for Vue Storefront providing an out-of-box routing and data handling.
 
