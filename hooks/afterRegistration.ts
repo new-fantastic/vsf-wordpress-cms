@@ -7,9 +7,7 @@ import * as vuex from '@vue-wordpress/core/plugin/initializers/store'
 export function afterRegistration ({ Vue, store, isServer }) {
 
   const tmpCfg: any = {
-    config: {
-      ...config.wordpressCms
-    },
+    ...config.wordpressCms,
     store: true,
     router: true
   }
@@ -25,12 +23,12 @@ export function afterRegistration ({ Vue, store, isServer }) {
 
       // HERE WILL BE PRODUCTS
 
-      await vuex.loadBase(store.dispatch, 'menus' in tmpCfg.config ? tmpCfg.config.menus : {}) // menus
-      vuex.setLang(store.commit, tmpCfg.config.lang) 
+      await vuex.loadBase(store.dispatch, 'menus' in tmpCfg ? tmpCfg.menus : {}) // menus
+      vuex.setLang(store.commit, tmpCfg.lang) 
       vuex.setConfig(store.commit, {
-        ...tmpCfg.config,
+        ...tmpCfg,
         asyncData: true
-      }) 
+      })
 
     }
   })
