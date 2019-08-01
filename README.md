@@ -8,7 +8,7 @@ Wordpress REST API module for Vue Storefront providing an out-of-box routing and
 
 <br>
 
-## 1. Download the module
+### 1. Download the module
 
 <br>
 
@@ -46,13 +46,11 @@ This will create a Git Submodule for your `vue-storefront` repository. Thanks to
 <br>
 
 ```js
-import { WpRestApi } from './vsf-wp-rest-api' // if installed via Git
-// or
-import { WpRestApi } from 'vsf-wp-rest-api'  // if installed via NPM
+import { WpJson } from './vsf-wp-json'
 ...
 export const registerModules: VueStorefrontModule[] = [
 ...
-WpRestApi
+WpJson
 ...
 ]
 ```
