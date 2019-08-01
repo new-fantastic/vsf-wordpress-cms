@@ -2,30 +2,48 @@
 
 Wordpress REST API module for Vue Storefront providing an out-of-box routing and data handling.
 
+<br>
+
 ## Installation
 
-### 1. Download the module
+<br>
 
-#### a. Via `git`
+## 1. Download the module
+
+<br>
+
+Go to your theme's main directory and run:
+
+<br>
+
+```
+npm install @vue-wordpress/core
+```
+or
+```
+yarn add @vue-wordpress/core
+```
+
+<br>
 
 Go to your `vue-storefront`'s `modules` catalog and clone the repository with the module.
 
-```bash
+<br>
+
+```
 cd ../vue-storefront/src/modules;
 git submodule add https://github.com/new-fantastic/vsf-wp-rest-api.git;
 ```
 
-#### b. Via `npm` / `yarn`
+<br>
 
-Go to your theme's catalog and install the module from `npm`.
+This will create a Git Submodule for your `vue-storefront` repository. Thanks to that you will be able pull for new updates :)
 
-```bash
-cd ../vue-storefront/src/themes/your-theme;
-yarn add vsf-wp-rest-api;
-```
+<br>
 
 ### 2. Import and register the module inside `vue-storefront/src/modules/index.ts`
 
+<br>
 
 ```js
 import { WpRestApi } from './vsf-wp-rest-api' // if installed via Git
