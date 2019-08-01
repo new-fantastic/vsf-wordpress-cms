@@ -34,7 +34,7 @@ Go to your `vue-storefront`'s `modules` catalog and clone the repository with th
 
 ```
 cd ../vue-storefront/src/modules;
-git submodule add https://github.com/new-fantastic/vsf-wp-rest-api.git;
+git submodule add https://github.com/new-fantastic/vsf-wp-json.git;
 ```
 
 <br>
