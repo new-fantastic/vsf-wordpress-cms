@@ -24,7 +24,6 @@ export function afterRegistration ({ Vue, store, isServer }) {
       // HERE WILL BE PRODUCTS
 
       await vuex.loadBase(store.dispatch, 'menus' in tmpCfg ? tmpCfg.menus : {}) // menus
-      vuex.setLang(store.commit, tmpCfg.lang) 
       vuex.setConfig(store.commit, {
         ...tmpCfg,
         asyncData: true
