@@ -4,7 +4,7 @@ import WpJson from '@vue-wordpress/core'
 import * as vuex from '@vue-wordpress/core/plugin/initializers/store'
 // import registerPlugin from '@vue-wordpress/core/plugin/registerPlugin'
 
-export function afterRegistration ({ Vue, store, isServer }) {
+export function afterRegistration({ Vue, store, isServer }) {
 
   const tmpCfg: any = {
     ...config.wordpressCms,
@@ -12,7 +12,7 @@ export function afterRegistration ({ Vue, store, isServer }) {
     router: true
   }
 
-  if('plugins' in config.wordpressCms) {
+  if ('plugins' in config.wordpressCms) {
     tmpCfg.plugins = config.wordpressCms.plugins
   }
 
@@ -23,7 +23,7 @@ export function afterRegistration ({ Vue, store, isServer }) {
 
       // HERE WILL BE PRODUCTS
 
-      await vuex.loadBase(store.dispatch, 'menus' in tmpCfg ? tmpCfg.menus : {}) // menus
+      await vuex.loadBase(store.dispatch, true) // menus
       vuex.setConfig(store.commit, {
         ...tmpCfg,
         asyncData: true
