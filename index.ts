@@ -1,42 +1,23 @@
-// import { module } from './store'
-// import { mediaModule } from './store/media'
 import { afterRegistration } from "./hooks/afterRegistration";
 import {
   VueStorefrontModule,
   VueStorefrontModuleConfig
 } from "@vue-storefront/core/lib/module";
-import { preparedRoutes } from "./router/routes";
 import { ModulePrefix } from "@vue-wordpress/core";
 
 import { config } from "@vue-wordpress/core/store/config";
-import { layouts } from "@vue-wordpress/core/store/layouts";
 import { menu } from "@vue-wordpress/core/store/menu";
 import { meta } from "@vue-wordpress/core/store/meta";
 import { post } from "@vue-wordpress/core/store/post";
-import cfg from "config";
 
 export const KEY = "wp_rest_content";
-// export const MEDIA_KEY = 'wpr_media'
-
-let router: any = {
-  routes: <any>preparedRoutes
-};
-if ("router" in cfg.wordpressCms) {
-  if (cfg.wordpressCms.router === false) {
-    router = {};
-  }
-}
 
 const moduleConfig: VueStorefrontModuleConfig = {
   key: KEY,
   afterRegistration,
-  router: {
-    ...router
-  },
   store: {
     modules: [
       { key: `${ModulePrefix}_config`, module: config },
-      { key: `${ModulePrefix}_layouts`, module: layouts },
       { key: `${ModulePrefix}_menu`, module: menu },
       { key: `${ModulePrefix}_meta`, module: meta },
       { key: `${ModulePrefix}_post`, module: post }
