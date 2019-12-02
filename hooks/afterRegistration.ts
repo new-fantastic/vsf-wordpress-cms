@@ -1,3 +1,4 @@
+import { once } from '@vue-storefront/core/helpers';
 import config from 'config';
 import VueWordpress from '@vue-wordpress/core';
 import * as vuex from '@vue-wordpress/core/plugin/initializers/store';
@@ -18,8 +19,6 @@ export async function afterRegistration({ Vue, store, isServer }) {
       tmpCfg.url = tmpCfg[`url_${storeCode}`]
     }
 
-    Vue.use(VueWordpress, tmpCfg);
-
     vuex.setConfig(store.commit, {
       ...tmpCfg,
       asyncData: true
@@ -28,5 +27,9 @@ export async function afterRegistration({ Vue, store, isServer }) {
     if (isServer) {
       await vuex.loadBase(store.dispatch, true); // menus
     }
+
+    once('__VUE_WP', async () => {
+      Vue.use(VueWordpress, tmpCfg);
+    })
     
 }
