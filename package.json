@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/vue-wordpress/vsf-wp-json#readme",
   "dependencies": {
-    "@vue-wordpress/core": "^1.3.1"
+    "@vue-wordpress/core": "^1.3.3"
   }
 }
