@@ -3,6 +3,7 @@ import config from 'config';
 import VueWordpress from '@vue-wordpress/core';
 import * as vuex from '@vue-wordpress/core/plugin/initializers/store';
 import { currentStoreView } from '@vue-storefront/core/lib/multistore';
+import { AsyncDataLoader } from '@vue-storefront/core/lib/async-data-loader'
 
 export async function afterRegistration({ Vue, store, isServer }) {
 
@@ -24,9 +25,11 @@ export async function afterRegistration({ Vue, store, isServer }) {
       asyncData: true
     });
 
-    if (isServer) {
-      await vuex.loadBase(store.dispatch, true); // menus
-    }
+    AsyncDataLoader.push({
+      async execute ({ route, store, context }) {
+        await vuex.loadBase(store.dispatch, true);
+      }
+    })
 
     once('__VUE_WP', async () => {
       Vue.use(VueWordpress, tmpCfg);
