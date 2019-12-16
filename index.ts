@@ -9,6 +9,7 @@ import { config } from "@vue-wordpress/core/store/config";
 import { menu } from "@vue-wordpress/core/store/menu";
 import { meta } from "@vue-wordpress/core/store/meta";
 import { post } from "@vue-wordpress/core/store/post";
+import { module } from './store'
 
 export const KEY = "wp_rest_content";
 
@@ -20,7 +21,8 @@ const moduleConfig: VueStorefrontModuleConfig = {
       { key: `${ModulePrefix}_config`, module: config },
       { key: `${ModulePrefix}_menu`, module: menu },
       { key: `${ModulePrefix}_meta`, module: meta },
-      { key: `${ModulePrefix}_post`, module: post }
+      { key: `${ModulePrefix}_post`, module: post },
+      { key: `${ModulePrefix}_products`, module }
     ]
   }
 };
