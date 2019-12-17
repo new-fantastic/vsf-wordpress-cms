@@ -5,11 +5,11 @@ import Vue from 'vue'
 export const mutations: MutationTree<any> = {
 
   [types.SET_SLOT] (state, { slot, products }) {
-    state.slots[slot] = products
+    Vue.set(state.slots, slot, products)
   },
 
   [types.SET_CATEGORY] (state, { categoryId, products }) {
-    state.categories[categoryId] = products
+    Vue.set(state.categories, categoryId, products)
   },
 
   [types.PUSH_TO_SLOT] (state, { slot, products }) {
