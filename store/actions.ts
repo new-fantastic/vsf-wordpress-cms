@@ -5,9 +5,7 @@ import { ActionTree } from 'vuex';
 import * as types from './mutation-types'
 import { baseFilterProductsQuery } from '@vue-storefront/core/helpers';
 import config from 'config'
-
 export const actions: ActionTree<ProductsState, any> = {
-  
   /**
    * 
    * @param {Number} categoryId - ID of category of products to fetch
@@ -21,7 +19,6 @@ export const actions: ActionTree<ProductsState, any> = {
    * @param {Boolean} shouldReturn? - Whether should it be returned or not
    * 
    */
-
   async fetchByCategory ({ commit }, {
     categoryId = 2,
     start = 0,
@@ -31,13 +28,13 @@ export const actions: ActionTree<ProductsState, any> = {
     includeFields = config.wordpressCms.includeFields,
     beforeSave = null,
     shouldSave = true,
-    shouldReturn = false
+    shouldReturn = false,
+    onlyClone = true
   }) {
     const query = baseFilterProductsQuery({
       id: categoryId
-    })
+    }, [], onlyClone)
     const { storeCode } = currentStoreView()
-
     try {
       let products: any = await quickSearchByQuery({
         query,
@@ -49,25 +46,20 @@ export const actions: ActionTree<ProductsState, any> = {
         excludeFields,
         includeFields
       })
-
       if (beforeSave && typeof beforeSave === 'function') {
         products = products.items.map(item => beforeSave(item))
       }
-
       if (shouldSave) {
         commit(types.SET_CATEGORY, { categoryId, products: products.items })
       }
-
       if (shouldReturn) {
         return products
       }
     } catch (err) {
       console.log('[VueWordpress] Could not fetch products from category ' + categoryId)
     }
-
     return false
   },
-
   /**
    * 
    * @param {Bodybuilder/SearchQuery} query - Query that will be send to elasticsearch
@@ -82,7 +74,6 @@ export const actions: ActionTree<ProductsState, any> = {
    * @param {Boolean} shouldReturn? - Whether should it be returned or not
    * 
    */
-  
   async fetchByQuery ({ commit }, {
     query,
     slotName,
@@ -96,7 +87,6 @@ export const actions: ActionTree<ProductsState, any> = {
     shouldReturn = false
   }) {
     const { storeCode } = currentStoreView()
-
     try {
       let products: any = await quickSearchByQuery({
         query,
@@ -108,25 +98,20 @@ export const actions: ActionTree<ProductsState, any> = {
         excludeFields,
         includeFields
       })
-
       if (beforeSave && typeof beforeSave === 'function') {
         products = products.items.map(item => beforeSave(item))
       }
-
       if (shouldSave) {
         commit(types.SET_SLOT, { slot: slotName, products: products.items })
       }
-
       if (shouldReturn) {
         return products
       }
     } catch (err) {
       console.log('[VueWordpress] Could not fetch products with ' + query)
     }
-
     return false
   },
-
   /**
    * 
    * @param {Array<String>} childSkus - Skus of childs
@@ -142,7 +127,6 @@ export const actions: ActionTree<ProductsState, any> = {
    * @param {Boolean} shouldReturn? - Whether should it be returned or not
    * 
    */
-
   async fetchBySkus ({ commit }, {
     childSkus,
     slotName,
@@ -154,14 +138,13 @@ export const actions: ActionTree<ProductsState, any> = {
     includeFields = config.wordpressCms.includeFields,
     beforeSave = null,
     shouldSave = true,
-    shouldReturn = false
+    shouldReturn = false,
+    onlyClone = true
   }) {
     const query = baseFilterProductsQuery({
       id: 2
-    }).applyFilter({key: 'configurable_children.sku', value: {'in': childSkus}})
-
+    }, [], onlyClone).applyFilter({key: 'configurable_children.sku', value: {'in': childSkus}})
     const { storeCode } = currentStoreView()
-
     try {
       let parents: any = await quickSearchByQuery({
         query,
@@ -173,41 +156,33 @@ export const actions: ActionTree<ProductsState, any> = {
         excludeFields,
         includeFields
       })
-
       let matchedProducts = childSkus.map(child => {
         let parent = parents.items.find(parent =>
           parent.configurable_children
             .some(children => children.sku === child && +parent.clone_color_id === children.color)
         )
-
         if (!parent) {
           console.log('[VueWordpress] Could not find product with SKU', child)
           return null
         }
-
         if (!cutOtherColors) {
           return parent
         }
         parent.configurable_children = parent.configurable_children.filter(children => children.color === +parent.clone_color_id)
         return parent
       }).filter(v => !!v)
-
       if (beforeSave && typeof beforeSave === 'function') {
         matchedProducts = matchedProducts.map(item => beforeSave(item))
       }
-
       if (shouldSave) {
         commit(types.SET_SLOT, { slot: slotName, products: matchedProducts })
       }
-
       if (shouldReturn) {
         return matchedProducts
       }
     } catch (err) {
       console.log('[VueWordpress] Could not fetch products from category ' + query)
     }
-
     return false
   }
-
 }
