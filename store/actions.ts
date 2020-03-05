@@ -139,11 +139,15 @@ export const actions: ActionTree<ProductsState, any> = {
     beforeSave = null,
     shouldSave = true,
     shouldReturn = false,
-    onlyClone = true
+    onlyClone = true,
+    colorId = null
   }) {
-    const query = baseFilterProductsQuery({
+    let query = baseFilterProductsQuery({
       id: 2
     }, [], onlyClone).applyFilter({key: 'configurable_children.sku', value: {'in': childSkus}})
+    if(colorId) {
+      query = query.applyFilter({key: 'clone_color_id', value: {'in': [colorId + '']}})
+    }
     const { storeCode } = currentStoreView()
     try {
       let parents: any = await quickSearchByQuery({
@@ -159,7 +163,7 @@ export const actions: ActionTree<ProductsState, any> = {
       let matchedProducts = childSkus.map(child => {
         let parent = parents.items.find(parent =>
           parent.configurable_children
-            .some(children => children.sku === child && +parent.clone_color_id === children.color)
+            .some(children => children.sku === child && +parent.clone_color_id == children.color)
         )
         if (!parent) {
           console.log('[VueWordpress] Could not find product with SKU', child)
