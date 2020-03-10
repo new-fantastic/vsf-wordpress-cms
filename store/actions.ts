@@ -29,11 +29,15 @@ export const actions: ActionTree<ProductsState, any> = {
     beforeSave = null,
     shouldSave = true,
     shouldReturn = false,
-    onlyClone = true
+    onlyClone = true,
+    queryModifier = null
   }) {
-    const query = baseFilterProductsQuery({
+    let query = baseFilterProductsQuery({
       id: categoryId
     }, [], onlyClone)
+    if (queryModifier) {
+      query = queryModifier(query)
+    }
     const { storeCode } = currentStoreView()
     try {
       let products: any = await quickSearchByQuery({
@@ -142,9 +146,9 @@ export const actions: ActionTree<ProductsState, any> = {
     onlyClone = true,
     colorId = null
   }) {
-    let query = baseFilterProductsQuery({
-      id: 2
-    }, [], onlyClone).applyFilter({key: 'configurable_children.sku', value: {'in': childSkus}})
+    let query = baseFilterProductsQuery(0, [], onlyClone).applyFilter({key: 'configurable_children.sku', value: {'in': childSkus}})
+    console.log('query', JSON.stringify(query));
+    
     if(colorId) {
       query = query.applyFilter({key: 'clone_color_id', value: {'in': [colorId + '']}})
     }
@@ -159,7 +163,9 @@ export const actions: ActionTree<ProductsState, any> = {
         storeCode: storeCode ? storeCode : null,
         excludeFields,
         includeFields
-      })
+      })      
+      console.log('parent', parents);
+      
       let matchedProducts = childSkus.map(child => {
         let parent = parents.items.find(parent =>
           parent.configurable_children
