@@ -19,7 +19,7 @@ export const actions: ActionTree<ProductsState, any> = {
    * @param {Boolean} shouldReturn? - Whether should it be returned or not
    * 
    */
-  async fetchByCategory ({ commit }, {
+  async fetchByCategory({ commit }, {
     categoryId = 2,
     start = 0,
     size = 50,
@@ -33,7 +33,7 @@ export const actions: ActionTree<ProductsState, any> = {
   }) {
     const query = baseFilterProductsQuery({
       id: categoryId
-    }, [], onlyClone)
+    }, [])
     const { storeCode } = currentStoreView()
     try {
       let products: any = await quickSearchByQuery({
@@ -74,7 +74,7 @@ export const actions: ActionTree<ProductsState, any> = {
    * @param {Boolean} shouldReturn? - Whether should it be returned or not
    * 
    */
-  async fetchByQuery ({ commit }, {
+  async fetchByQuery({ commit }, {
     query,
     slotName,
     start = 0,
@@ -127,7 +127,7 @@ export const actions: ActionTree<ProductsState, any> = {
    * @param {Boolean} shouldReturn? - Whether should it be returned or not
    * 
    */
-  async fetchBySkus ({ commit }, {
+  async fetchBySkus({ commit }, {
     childSkus,
     slotName,
     cutOtherColors = true,
@@ -143,7 +143,7 @@ export const actions: ActionTree<ProductsState, any> = {
   }) {
     const query = baseFilterProductsQuery({
       id: 2
-    }, [], onlyClone).applyFilter({key: 'configurable_children.sku', value: {'in': childSkus}})
+    }, []).applyFilter({ key: 'configurable_children.sku', value: { 'in': childSkus } })
     const { storeCode } = currentStoreView()
     try {
       let parents: any = await quickSearchByQuery({
