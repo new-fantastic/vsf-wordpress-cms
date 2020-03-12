@@ -164,7 +164,6 @@ export const actions: ActionTree<ProductsState, any> = {
         excludeFields,
         includeFields
       })      
-      console.log('parent', parents);
       
       let matchedProducts = childSkus.map(child => {
         let parent = parents.items.find(parent =>
