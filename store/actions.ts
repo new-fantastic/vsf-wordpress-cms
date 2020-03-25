@@ -5,6 +5,22 @@ import { ActionTree } from 'vuex';
 import * as types from './mutation-types'
 import { baseFilterProductsQuery } from '@vue-storefront/core/helpers';
 import config from 'config'
+import { findConfigurableChildAsync } from '@vue-storefront/core/modules/catalog/helpers'
+
+const configureProduct = item => {
+  if (item && (item as any).type_id == 'configurable') {
+    let selectedVariant = findConfigurableChildAsync({ product: item, availabilityCheck: true })
+    if (!selectedVariant) {
+      selectedVariant = findConfigurableChildAsync({ product: item, selectDefaultChildren: true, availabilityCheck: true }) // return first available child
+    }
+    return {
+      ...(item as any),
+      ...selectedVariant
+    }
+  }
+  return item
+}
+
 export const actions: ActionTree<ProductsState, any> = {
   /**
    * 
@@ -19,7 +35,7 @@ export const actions: ActionTree<ProductsState, any> = {
    * @param {Boolean} shouldReturn? - Whether should it be returned or not
    * 
    */
-  async fetchByCategory ({ commit }, {
+  async fetchByCategory ({ dispatch, commit }, {
     categoryId = 2,
     start = 0,
     size = 50,
@@ -40,7 +56,8 @@ export const actions: ActionTree<ProductsState, any> = {
     }
     const { storeCode } = currentStoreView()
     try {
-      let products: any = await quickSearchByQuery({
+      
+      let products = await dispatch('product/list', {
         query,
         start,
         size,
@@ -49,7 +66,12 @@ export const actions: ActionTree<ProductsState, any> = {
         storeCode: storeCode ? storeCode : null,
         excludeFields,
         includeFields
-      })
+      }, { root: true })
+
+      for (const [index, item] of Object.entries(products.items)) {
+        products.items[index] = configureProduct(item)
+      }
+
       if (beforeSave && typeof beforeSave === 'function') {
         products = products.items.map(item => beforeSave(item))
       }
@@ -61,6 +83,7 @@ export const actions: ActionTree<ProductsState, any> = {
       }
     } catch (err) {
       console.log('[VueWordpress] Could not fetch products from category ' + categoryId)
+      console.log(err)
     }
     return false
   },
@@ -78,7 +101,7 @@ export const actions: ActionTree<ProductsState, any> = {
    * @param {Boolean} shouldReturn? - Whether should it be returned or not
    * 
    */
-  async fetchByQuery ({ commit }, {
+  async fetchByQuery ({ dispatch, commit }, {
     query,
     slotName,
     start = 0,
@@ -92,7 +115,7 @@ export const actions: ActionTree<ProductsState, any> = {
   }) {
     const { storeCode } = currentStoreView()
     try {
-      let products: any = await quickSearchByQuery({
+      let products = await dispatch('product/list', {
         query,
         start,
         size,
@@ -101,7 +124,12 @@ export const actions: ActionTree<ProductsState, any> = {
         storeCode: storeCode ? storeCode : null,
         excludeFields,
         includeFields
-      })
+      }, { root: true })
+
+      for (const [index, item] of Object.entries(products.items)) {
+        products.items[index] = configureProduct(item)
+      }
+
       if (beforeSave && typeof beforeSave === 'function') {
         products = products.items.map(item => beforeSave(item))
       }
@@ -179,7 +207,7 @@ export const actions: ActionTree<ProductsState, any> = {
         }
         parent.configurable_children = parent.configurable_children.filter(children => children.color === +parent.clone_color_id)
         return parent
-      }).filter(v => !!v)
+      }).filter(v => !!v).map(item => configureProduct(item))
       if (beforeSave && typeof beforeSave === 'function') {
         matchedProducts = matchedProducts.map(item => beforeSave(item))
       }
