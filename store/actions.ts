@@ -6,6 +6,7 @@ import * as types from './mutation-types'
 import { baseFilterProductsQuery } from '@vue-storefront/core/helpers';
 import config from 'config'
 import { findConfigurableChildAsync } from '@vue-storefront/core/modules/catalog/helpers'
+import Vue from 'vue'
 
 const configureProduct = item => {
   if (item && (item as any).type_id == 'configurable') {
@@ -19,6 +20,10 @@ const configureProduct = item => {
     }
   }
   return item
+}
+
+const populateTags = item => {
+  Vue.prototype.$cacheTags.add(`P${item.id}`)
 }
 
 export const actions: ActionTree<ProductsState, any> = {
@@ -70,6 +75,7 @@ export const actions: ActionTree<ProductsState, any> = {
 
       for (const [index, item] of Object.entries(products.items)) {
         products.items[index] = configureProduct(item)
+        populateTags(item)
       }
 
       if (beforeSave && typeof beforeSave === 'function') {
@@ -128,6 +134,7 @@ export const actions: ActionTree<ProductsState, any> = {
 
       for (const [index, item] of Object.entries(products.items)) {
         products.items[index] = configureProduct(item)
+        populateTags(item)
       }
 
       if (beforeSave && typeof beforeSave === 'function') {
@@ -175,7 +182,7 @@ export const actions: ActionTree<ProductsState, any> = {
     colorId = null
   }) {
     let query = baseFilterProductsQuery(0, [], onlyClone).applyFilter({key: 'configurable_children.sku', value: {'in': childSkus}})
-    console.log('query', JSON.stringify(query));
+    // console.log('query', JSON.stringify(query));
     
     if(colorId) {
       query = query.applyFilter({key: 'clone_color_id', value: {'in': [colorId + '']}})
@@ -211,6 +218,11 @@ export const actions: ActionTree<ProductsState, any> = {
       if (beforeSave && typeof beforeSave === 'function') {
         matchedProducts = matchedProducts.map(item => beforeSave(item))
       }
+
+      for (let item of matchedProducts) {
+        populateTags(item)
+      }
+
       if (shouldSave) {
         commit(types.SET_SLOT, { slot: slotName, products: matchedProducts })
       }
