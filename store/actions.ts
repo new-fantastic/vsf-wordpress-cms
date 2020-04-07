@@ -3,7 +3,7 @@ import { quickSearchByQuery } from '@vue-storefront/core/lib/search';
 import { ProductsState } from '../types/ProductsState'
 import { ActionTree } from 'vuex';
 import * as types from './mutation-types'
-import { baseFilterProductsQuery } from '@vue-storefront/core/helpers';
+import { baseFilterProductsQuery, isServer } from '@vue-storefront/core/helpers';
 import config from 'config'
 import { findConfigurableChildAsync } from '@vue-storefront/core/modules/catalog/helpers'
 import Vue from 'vue'
@@ -23,7 +23,9 @@ const configureProduct = item => {
 }
 
 const populateTags = item => {
-  Vue.prototype.$cacheTags.add(`P${item.id}`)
+  if (isServer) {
+    Vue.prototype.$cacheTags.add(`P${item.id}`)    
+  }
 }
 
 export const actions: ActionTree<ProductsState, any> = {
