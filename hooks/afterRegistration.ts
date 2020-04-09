@@ -29,10 +29,11 @@ export async function afterRegistration({ Vue, store, isServer }) {
       async execute ({ route, store, context }) {
         await vuex.loadBase(store.dispatch, true);
         if (isServer) {
-          Vue.prototype.$cacheTags.add('menu')
-          const menuSlugs = Object.keys(store.state.wp_menu.menu)
-          for (let slug of menuSlugs) {
-            Vue.prototype.$cacheTags.add(`menu-${slug}`)
+          Vue.prototype.$cacheTags.add('wp:menu')
+          const menus = Object.values(store.state.wp_menu.menu)
+          for (let menu of menus) {
+            // Vue.prototype.$cacheTags.add(`menu-${slug}`)
+            Vue.prototype.$cacheTags.add(`wp:menu:${(<any>menu).term_id}`)
           }
         }
       }
