@@ -187,7 +187,7 @@ export const actions: ActionTree<ProductsState, any> = {
     // console.log('query', JSON.stringify(query));
     
     if(colorId) {
-      query = query.applyFilter({key: 'clone_color_id', value: {'in': [colorId + '']}})
+      query = query.applyFilter({key: 'color', value: {'in': [+colorId]}})
     }
     const { storeCode } = currentStoreView()
     try {
@@ -203,10 +203,11 @@ export const actions: ActionTree<ProductsState, any> = {
       })      
       
       let matchedProducts = childSkus.map(child => {
-        let parent = parents.items.find(parent =>
-          parent.configurable_children
-            .some(children => children.sku === child && +parent.clone_color_id == children.color)
-        )
+        const parent = parents.items.find(parent => parent.clone_of == child)
+        // let parent = parents.items.find(parent =>
+        //   parent.configurable_children
+        //     .some(children => children.sku === child && +parent.clone_color_id == children.color)
+        // )
         if (!parent) {
           console.log('[VueWordpress] Could not find product with SKU', child)
           return null
@@ -214,9 +215,10 @@ export const actions: ActionTree<ProductsState, any> = {
         if (!cutOtherColors) {
           return parent
         }
-        parent.configurable_children = parent.configurable_children.filter(children => children.color === +parent.clone_color_id)
+        parent.configurable_children = parent.configurable_children.filter(children => children.color == parent.color)
         return parent
       }).filter(v => !!v).map(item => configureProduct(item))
+
       if (beforeSave && typeof beforeSave === 'function') {
         matchedProducts = matchedProducts.map(item => beforeSave(item))
       }
