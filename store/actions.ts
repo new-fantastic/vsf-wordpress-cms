@@ -183,7 +183,7 @@ export const actions: ActionTree<ProductsState, any> = {
     onlyClone = true,
     colorId = null
   }) {
-    let query = baseFilterProductsQuery(0, [], onlyClone).applyFilter({key: 'configurable_children.sku', value: {'in': childSkus}})
+    let query = baseFilterProductsQuery(0, [], onlyClone).applyFilter({key: 'clone_of.keyword', value: {'in': childSkus}})
     // console.log('query', JSON.stringify(query));
     
     if(colorId) {
@@ -200,24 +200,26 @@ export const actions: ActionTree<ProductsState, any> = {
         storeCode: storeCode ? storeCode : null,
         excludeFields,
         includeFields
-      })      
+      })
       
-      let matchedProducts = childSkus.map(child => {
-        const parent = parents.items.find(parent => parent.clone_of == child)
-        // let parent = parents.items.find(parent =>
-        //   parent.configurable_children
-        //     .some(children => children.sku === child && +parent.clone_color_id == children.color)
-        // )
-        if (!parent) {
-          console.log('[VueWordpress] Could not find product with SKU', child)
-          return null
-        }
-        if (!cutOtherColors) {
-          return parent
-        }
-        parent.configurable_children = parent.configurable_children.filter(children => children.color == parent.color)
-        return parent
-      }).filter(v => !!v).map(item => configureProduct(item))
+      // let matchedProducts = childSkus.map(child => {
+      //   const parent = parents.items.find(parent => parent.clone_of == child)
+      //   // let parent = parents.items.find(parent =>
+      //   //   parent.configurable_children
+      //   //     .some(children => children.sku === child && +parent.clone_color_id == children.color)
+      //   // )
+      //   if (!parent) {
+      //     console.log('[VueWordpress] Could not find product with SKU', child)
+      //     return null
+      //   }
+      //   if (!cutOtherColors) {
+      //     return parent
+      //   }
+      //   parent.configurable_children = parent.configurable_children.filter(children => children.color == parent.color)
+      //   return parent
+      // }).filter(v => !!v).map(item => configureProduct(item))
+
+      let matchedProducts = parents.items.map(item => configureProduct(item))
 
       if (beforeSave && typeof beforeSave === 'function') {
         matchedProducts = matchedProducts.map(item => beforeSave(item))
