@@ -16,7 +16,17 @@ const configureProduct = item => {
     }
     return {
       ...(item as any),
-      ...selectedVariant
+      ...selectedVariant,
+      product_option: {
+        extension_attributes: {
+          configurable_item_options: item.configurable_options.map(option => {
+            return {
+              option_id: option.attribute_id,
+              option_value: selectedVariant[option.attribute_code]
+            }
+          })
+        }
+      }
     }
   }
   return item
@@ -219,7 +229,17 @@ export const actions: ActionTree<ProductsState, any> = {
       //   return parent
       // }).filter(v => !!v).map(item => configureProduct(item))
 
-      let matchedProducts = parents.items.map(item => configureProduct(item))
+      let matchedProducts = parents.items.map(item => {
+        
+        let parentSku = false
+        if (item.sku && item.clone_color_id && item.clone_size_id) {
+          parentSku = item.sku.replace(new RegExp(`-${item.clone_color_id}-${item.clone_size_id}$`), '')
+        }
+        return {
+          ...item,
+          ...(parentSku ? { parentSku } : {})
+        }
+      }).map(item => configureProduct(item))
 
       if (beforeSave && typeof beforeSave === 'function') {
         matchedProducts = matchedProducts.map(item => beforeSave(item))
