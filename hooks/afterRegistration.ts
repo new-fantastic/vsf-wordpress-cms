@@ -1,11 +1,12 @@
-import { once } from '@vue-storefront/core/helpers';
-import config from 'config';
+import Vue from 'vue'
+import { Store } from 'vuex'
 import VueWordpress from '@vue-wordpress/core';
+import { once } from '@vue-storefront/core/helpers';
 import * as vuex from '@vue-wordpress/core/plugin/initializers/store';
 import { currentStoreView } from '@vue-storefront/core/lib/multistore';
 import { AsyncDataLoader } from '@vue-storefront/core/lib/async-data-loader'
 
-export async function afterRegistration({ Vue, store, isServer }) {
+export async function afterRegistration(config, store: Store<any>) {
 
     const isProd = process.env.NODE_ENV === 'production'
 
